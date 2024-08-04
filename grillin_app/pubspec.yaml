@@ -1,0 +1,50 @@
+name: grillin_app
+description: A new Flutter project.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  collection: ^1.18.0
+  dropdown_button2: ^2.3.9
+  intl: ^0.18.0
+  mvc_pattern: ^8.12.0
+  provider: ^6.0.3
+  
+
+dev_dependencies:
+  flutter_launcher_icons: ^0.13.1
+  flutter_lints: ^2.0.1
+  flutter_test:
+    sdk: flutter
+
+flutter_icons:
+# Add icon in this folder and complete the path. Then run: flutter pub get 
+# Finally run: flutter pub run flutter_launcher_icons
+  # Global
+  image_path: "images/app_icon/"
+  # Android
+  android: "launcher_icon"
+  adaptive_icon_background: "#FFFFFF"
+  #adaptive_icon_foreground: "images/app_icon/"
+  # iOS
+  ios: true
+  remove_alpha_ios: true
+
+
+flutter:
+  generate: true
+  uses-material-design: true
+
+  assets:
+    - images/
