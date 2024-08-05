@@ -237,7 +237,7 @@ class AddExpensePopupState extends State<AddExpensePopup>
         prefixIcon: Icon(
           Icons.attach_money_sharp,
           color: KColors.white,
-          size: KValues.fontSizeLargeXL,
+          size: KValues.fontSizeLargeXXL,
         ),
       ),
     );
@@ -359,7 +359,7 @@ class AddExpensePopupState extends State<AddExpensePopup>
             Icons.edit,
             color:
                 KColors.white.withOpacity(_addNewConceptSwitchValue ? 1 : .5),
-            size: KValues.fontSizeLargeXL,
+            size: KValues.fontSizeLargeXXL,
           ),
         ),
       ),

@@ -7,9 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 // Project imports:
+import '../../../values/k_strings.dart';
 import '../../enums/category_enum.dart';
 import '../../interfaces/i_view_controller.dart';
 import '../../managers/page_manager.dart';
+import '../../utils/functions_utils.dart';
 import '../../utils/page_args.dart';
 import '../popups/custom_overlay_popup.dart';
 
@@ -28,6 +30,8 @@ class HomePageController extends ControllerMVC implements IViewController {
   bool isLoading = false;
   TextEditingController controller = TextEditingController();
 
+  bool _availableToClose = false;
+
   @override
   void initPage({PageArgs? arguments}) {
     controller = TextEditingController();
@@ -35,7 +39,19 @@ class HomePageController extends ControllerMVC implements IViewController {
 
   void onBack(bool didPop, BuildContext context) {
     if (didPop) return;
-    PageManager().goBack();
+    if (_availableToClose) {
+      return PageManager().goBack();
+    } else {
+      _availableToClose = true;
+      showToast(
+          message: KStrings.tapAgainToExit,
+          context: PageManager().currentContext,
+          duration: const Duration(seconds: 2));
+      Future.delayed(const Duration(seconds: 2)).then((value) {
+        _availableToClose = false;
+      });
+      return;
+    }
   }
 
   Future<void> onCategoryTap({required CategoryEnum category}) async {

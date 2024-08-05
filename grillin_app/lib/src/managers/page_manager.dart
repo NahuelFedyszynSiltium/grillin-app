@@ -1,10 +1,12 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_exit_app/flutter_exit_app.dart';
 
 // Project imports:
 import '../enums/page_names.dart';
 import '../ui/pages/home_page.dart';
+import '../ui/pages/transfer_saves_page.dart';
 import '../utils/page_args.dart';
 
 class PageManager {
@@ -43,6 +45,9 @@ class PageManager {
     switch (page) {
       case PageNames.home:
         return MaterialPageRoute(builder: (context) => HomePage(arguments));
+      case PageNames.transferSaves:
+        return MaterialPageRoute(
+            builder: (context) => TransferSavesPage(arguments));
       default:
         return throw Exception("No existe página con este PageName");
     }
@@ -83,7 +88,12 @@ class PageManager {
       stackPages.removeLast();
     }
     if (stackPages.isEmpty) {
-      SystemNavigator.pop();
+      try {
+        Navigator.of(currentContext).maybePop();
+      } catch (er) {
+        print(er);
+      }
+      FlutterExitApp.exitApp();
     }
   }
 
@@ -126,6 +136,11 @@ class PageManager {
   //NAV EXAMPLE
   goHomePage({PageArgs? args, Function(PageArgs? args)? actionBack}) {
     _goPage(PageNames.home.toString(),
+        args: args, actionBack: actionBack, makeRootPage: true);
+  }
+
+  goTransferSavesPage({PageArgs? args, Function(PageArgs? args)? actionBack}) {
+    _goPage(PageNames.transferSaves.toString(),
         args: args, actionBack: actionBack, makeRootPage: true);
   }
 }

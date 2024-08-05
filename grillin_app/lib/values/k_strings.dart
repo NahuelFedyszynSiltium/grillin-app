@@ -20,4 +20,14 @@ class KStrings {
 
   static const String savesExpenseHint =
       "Agregar un nuevo ahorro lo sumará al balance en lugar de restarlo como ocurré con las demás categorías";
+
+  static String transferSavings = "Transferir ahorros";
+
+  static String board = "Tablero";
+
+  static String tapAgainToExit = "Presiona de nuevo para salir";
+
+  static String totalSaves = "Ahorros totales";
+
+  static String trasnferTo = "Transferir a";
 }

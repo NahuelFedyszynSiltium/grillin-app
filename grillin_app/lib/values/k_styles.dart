@@ -6,7 +6,7 @@ import 'k_values.dart';
 class KStyles {
   //TEXT STYLES
   static const TextStyle homeCardBodyTextStyle = TextStyle(
-    fontSize: KValues.fontSizeLargeXL,
+    fontSize: KValues.fontSizeLargeXXL,
     color: KColors.white,
     fontWeight: FontWeight.w400,
   );

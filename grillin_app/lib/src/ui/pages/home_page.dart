@@ -46,6 +46,7 @@ class HomePagePageState extends StateMVC<HomePage> {
         child: Scaffold(
           appBar: SimpleComponents.menuAppBar,
           resizeToAvoidBottomInset: false,
+          drawer: SimpleComponents().drawer,
           body: Container(
             decoration: const BoxDecoration(
               color: KColors.primary,
