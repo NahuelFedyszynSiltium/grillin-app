@@ -17,7 +17,10 @@ void main() {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: KColors.primary,
+    systemNavigationBarColor: KColors.primary,
   ));
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   runApp(
     MultiProvider(
       providers: [
@@ -70,7 +73,7 @@ class MyHomePageState extends State<MyApp> {
         ),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      title: 'Grillin App',
+      title: 'Grillin',
       home: _initPage(),
     );
   }

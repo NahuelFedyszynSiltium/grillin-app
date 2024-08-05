@@ -1,3 +1,5 @@
+import '../models/expense_model.dart';
+
 class DataManager {
   static final DataManager _instance = DataManager._constructor();
 
@@ -10,4 +12,8 @@ class DataManager {
   init() async {}
 
   void cleanData() {}
+
+  Future<void> postAddNewExpense({required ExpenseModel expenseModel}) async {
+    //TODO: DATABASE ADD
+  }
 }

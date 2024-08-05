@@ -1,4 +1,4 @@
 enum PageNames {
   home,
-  login,
+  init,
 }

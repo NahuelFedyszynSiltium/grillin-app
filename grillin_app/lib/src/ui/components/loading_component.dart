@@ -2,9 +2,9 @@
 
 // Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:grillin_app/values/k_colors.dart';
 
 // Project imports:
+import '../../../values/k_colors.dart';
 
 class LoadingComponent extends StatefulWidget {
   final Color color;

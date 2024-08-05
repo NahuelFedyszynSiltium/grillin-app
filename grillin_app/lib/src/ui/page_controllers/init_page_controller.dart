@@ -1,12 +1,14 @@
 // Package imports:
+import 'package:flutter/services.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 // Project imports:
+import '../../../src/managers/page_manager.dart';
+import '../../../values/k_values.dart';
 import '../../interfaces/i_view_controller.dart';
 import '../../managers/data_manager.dart';
 import '../../providers/app_provider.dart';
 import '../../utils/page_args.dart';
-import '/src/ui/pages/home_page.dart';
 
 class InitPageController extends ControllerMVC implements IViewController {
   static late InitPageController _this;
@@ -22,18 +24,19 @@ class InitPageController extends ControllerMVC implements IViewController {
 
   @override
   void initPage({PageArgs? arguments}) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     args = arguments;
   }
 
   @override
   disposePage() {}
 
-  init() async {
+  initApp() async {
+    await Future.delayed(KValues.splashDuration);
     await DataManager().init();
     await AppProvider().init();
-  }
-
-  goInitialPage() {
-    return const HomePage(null);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: SystemUiOverlay.values);
+    PageManager().goHomePage();
   }
 }

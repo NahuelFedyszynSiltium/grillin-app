@@ -14,6 +14,8 @@ class PageManager {
   PageNames? currentPage;
   List<String> stackPages = [];
 
+  BuildContext get currentContext => navigatorKey.currentContext!;
+
   factory PageManager() {
     return _instance;
   }
@@ -122,8 +124,8 @@ class PageManager {
   }
 
   //NAV EXAMPLE
-  // goHomePage({PageArgs? args, Function(PageArgs? args)? actionBack}) {
-  //   _goPage(PageNames.home.toString(),
-  //       args: args, actionBack: actionBack, makeRootPage: true);
-  // }
+  goHomePage({PageArgs? args, Function(PageArgs? args)? actionBack}) {
+    _goPage(PageNames.home.toString(),
+        args: args, actionBack: actionBack, makeRootPage: true);
+  }
 }

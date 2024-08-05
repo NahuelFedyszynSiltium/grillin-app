@@ -9,7 +9,7 @@ import '../managers/page_manager.dart';
 
 //Currency
 String currencyFormat(double? price) {
-  return price != null ? NumberFormat("#,##0.00", "en_US").format(price) : "";
+  return price != null ? NumberFormat("#,##0.00", "en_US").format(price) : "-";
 }
 
 //Date
