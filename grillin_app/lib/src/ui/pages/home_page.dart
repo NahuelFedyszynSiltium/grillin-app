@@ -9,6 +9,7 @@ import 'package:mvc_pattern/mvc_pattern.dart';
 // Project imports:
 import '../../../values/k_colors.dart';
 import '../../../values/k_styles.dart';
+import '../../../values/k_values.dart';
 import '../../enums/category_enum.dart';
 import '../../utils/functions_utils.dart';
 import '../../utils/page_args.dart';
@@ -60,20 +61,26 @@ class HomePagePageState extends StateMVC<HomePage> {
                     child: _card(
                       category: CategoryEnum.dailys,
                       amount: 123.54,
+                      percent: 50,
                     ),
                   ),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.0125),
                   Expanded(
                     child: _card(
                       category: CategoryEnum.personals,
                       amount: 16413567641651351.54,
+                      percent: 30,
                     ),
                   ),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.0125),
                   Expanded(
                     child: _card(
                       category: CategoryEnum.achievemnts,
                       amount: 123.54,
+                      percent: 20,
                     ),
                   ),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.0125),
                   Expanded(
                     child: _card(
                       category: CategoryEnum.saves,
@@ -94,6 +101,7 @@ class HomePagePageState extends StateMVC<HomePage> {
     required CategoryEnum category,
     required double amount,
     bool showTransferButton = false,
+    int? percent,
   }) {
     return GestureDetector(
       onTap: () {
@@ -102,14 +110,28 @@ class HomePagePageState extends StateMVC<HomePage> {
       child: Stack(
         children: [
           Container(
-            margin: const EdgeInsets.symmetric(vertical: 5),
+            height: double.infinity,
+            width: double.infinity,
             decoration: BoxDecoration(
               color: category.categoryColor(),
               borderRadius: BorderRadius.circular(15),
             ),
+            child: Visibility(
+              visible: category != CategoryEnum.saves && percent != null,
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: Text(
+                  "$percent ",
+                  style: TextStyle(
+                    color: KColors.white.withOpacity(0.125),
+                    fontSize: MediaQuery.of(context).size.width * .4,
+                    fontStyle: FontStyle.italic,
+                  ),
+                ),
+              ),
+            ),
           ),
           Container(
-            margin: const EdgeInsets.symmetric(vertical: 5),
             width: double.infinity,
             height: double.infinity,
             decoration: BoxDecoration(
