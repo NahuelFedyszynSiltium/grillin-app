@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 class KColors {
+  static const Color primaryT1 = Color.fromARGB(255, 0, 58, 5);
   static const Color primary = Color.fromARGB(255, 0, 77, 7);
   static const Color primaryL1 = Color.fromARGB(255, 24, 133, 33);
 
@@ -9,7 +10,7 @@ class KColors {
   static const Color redL1 = Color.fromARGB(255, 221, 92, 94);
 
   static const Color black = Color(0XFF000000);
-  static const Color blackL1 = Color.fromARGB(255, 82, 82, 82);
+  static const Color blackL1 = Color.fromARGB(255, 182, 182, 182);
 
   static const Color white = Color(0XFFFFFFFF);
 

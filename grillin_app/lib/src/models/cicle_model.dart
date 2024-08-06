@@ -4,7 +4,7 @@ class CicleModel {
   late int id;
   late List<ExpenseModel> expenses;
   late DateTime createdAt;
-  late DateTime? endedAt;
+  DateTime? endedAt;
   late double fixedIncome;
 
   CicleModel({

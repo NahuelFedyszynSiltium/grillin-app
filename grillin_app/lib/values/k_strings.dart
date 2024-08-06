@@ -4,6 +4,12 @@ class KStrings {
   static const String categoryNameDailys = "Fijos";
   static const String categoryNameAchievemnts = "Metas";
 
+  static const String history = "Historial";
+  static const String historyTableHeaderCicle = "Ciclo";
+  static const String historyTableHeaderConcept = "Concepto";
+  static const String historyTableHeaderAmount = "Monto";
+  static const String historyTableHeaderDate = "Fecha";
+
   static const String homeCardNameSaves = "Ahorros";
   static const String homeCardNamePersonals = "Para gastos personales";
   static const String homeCardNameDailys = "Para gastos fijos";
@@ -14,6 +20,7 @@ class KStrings {
   static const String addNewConcept = "Agregar nuevo concepto";
 
   static const String accept = "Aceptar";
+  static const String all = "Todos";
 
   static const String addExpenseFailure =
       "Ocurrió un error al registrar tu consumo";
@@ -52,6 +59,11 @@ class KStrings {
       "Ocurrió un error al obtener los valores de porcentajes";
   static String errorFailedToUpdatePercents =
       "Ocurrió un error al intentar actualizar tus porcentajes";
+
+  static String errorFailedToGetExpensesHistory =
+      "Ocurrió un error al intentar obtener el historial de transacciónes";
+  static String errorFailedEmptyExpensesHistory =
+      "No existen transacciónes para mostrar";
 
   //SUCCESS REGION
   static String successUpdatedPercents =

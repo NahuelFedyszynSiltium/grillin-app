@@ -1,3 +1,4 @@
+import '../../values/k_dummy_data.dart';
 import '../enums/category_enum.dart';
 import '../models/board_data_model.dart';
 import '../models/concept_model.dart';
@@ -49,6 +50,17 @@ class DataManager {
     );
   }
 
+  Future<List<ExpenseModel>> getExpensesHistory(
+      {required int page, required List<CategoryEnum> categories}) async {
+    //TODO: DATABASE GET
+    await Future.delayed(const Duration(seconds: 2));
+    List<ExpenseModel> aux = List.from(KDummyData.historyExpenses);
+    aux.removeWhere(
+      (element) => !categories.contains(element.category),
+    );
+    return aux;
+  }
+
   // END REGION GET
 
   // REGION POST
@@ -69,7 +81,7 @@ class DataManager {
 
   Future<void> putUpdatePercents(
       {required PercentsCategoryResponseModel
-          percentsCategoryREsponseModel}) async {
+          percentsCategoryResponseodel}) async {
     //TODO: DATABASE UPDATE
     await Future.delayed(const Duration(seconds: 2));
   }

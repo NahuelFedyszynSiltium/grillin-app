@@ -2,10 +2,11 @@ import '../enums/category_enum.dart';
 import 'concept_model.dart';
 
 class ExpenseModel {
-  late int? id;
+  int? id;
+  int? cicleId;
   late CategoryEnum category;
   late ConceptModel conceptModel;
-  late DateTime? createdAt;
+  DateTime? createdAt;
   late double amount;
 
   ExpenseModel({
@@ -13,6 +14,7 @@ class ExpenseModel {
     required this.amount,
     required this.category,
     this.id,
+    this.cicleId,
     this.createdAt,
   });
 
@@ -24,6 +26,7 @@ class ExpenseModel {
       orElse: () => CategoryEnum.personals,
     );
     id = json["id"];
+    cicleId = json["cicleId"];
     createdAt = DateTime.tryParse(json["createdAt"]) ?? DateTime.now();
   }
 
@@ -32,6 +35,7 @@ class ExpenseModel {
         "amount": amount,
         "categoryId": category.value,
         "id": id,
+        "cicleId": cicleId,
         "createdAt": createdAt,
       };
 }

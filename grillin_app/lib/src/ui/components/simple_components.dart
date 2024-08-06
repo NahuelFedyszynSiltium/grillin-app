@@ -80,6 +80,14 @@ class SimpleComponents {
                 PageManager().goSetIncomePage();
               },
             ),
+            _drawerItem(
+              icon: Icons.history,
+              label: KStrings.history,
+              onTap: () {
+                key.currentState?.closeDrawer();
+                PageManager().goHistoryPage();
+              },
+            ),
           ],
         ),
       );

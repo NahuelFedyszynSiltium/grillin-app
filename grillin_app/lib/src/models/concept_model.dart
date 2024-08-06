@@ -1,10 +1,10 @@
 import '../enums/category_enum.dart';
 
 class ConceptModel {
-  late int? id;
+  int? id;
   late CategoryEnum category;
   late String name;
-  late DateTime? createdAt;
+  DateTime? createdAt;
 
   ConceptModel({
     required this.category,
