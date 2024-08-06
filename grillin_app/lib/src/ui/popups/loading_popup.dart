@@ -26,7 +26,7 @@ class LoadingPopup {
   Future show() {
     return showDialog(
         context: context,
-        barrierColor: KColors.primary.withOpacity(0.5),
+        barrierColor: KColors.primary.withOpacity(0.75),
         barrierDismissible: false,
         builder: (BuildContext context) {
           return _dialog();
@@ -57,7 +57,7 @@ class LoadingPopup {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        loadingComponent(true, color: Colors.white, size: 50),
+        loadingComponent(true, size: 50),
       ],
     );
   }

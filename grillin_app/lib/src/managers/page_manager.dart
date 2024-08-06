@@ -6,6 +6,7 @@ import 'package:flutter_exit_app/flutter_exit_app.dart';
 import '../enums/page_names.dart';
 import '../ui/pages/change_percents_page.dart';
 import '../ui/pages/home_page.dart';
+import '../ui/pages/set_income_page.dart';
 import '../ui/pages/transfer_saves_page.dart';
 import '../utils/page_args.dart';
 
@@ -48,6 +49,9 @@ class PageManager {
             builder: (context) => ChangePercentsPage(arguments));
       case PageNames.home:
         return MaterialPageRoute(builder: (context) => HomePage(arguments));
+      case PageNames.setIncome:
+        return MaterialPageRoute(
+            builder: (context) => SetIncomePage(arguments));
       case PageNames.transferSaves:
         return MaterialPageRoute(
             builder: (context) => TransferSavesPage(arguments));
@@ -147,6 +151,11 @@ class PageManager {
 
   goTransferSavesPage({PageArgs? args, Function(PageArgs? args)? actionBack}) {
     _goPage(PageNames.transferSaves.toString(),
+        args: args, actionBack: actionBack, makeRootPage: true);
+  }
+
+  goSetIncomePage({PageArgs? args, Function(PageArgs? args)? actionBack}) {
+    _goPage(PageNames.setIncome.toString(),
         args: args, actionBack: actionBack, makeRootPage: true);
   }
 }

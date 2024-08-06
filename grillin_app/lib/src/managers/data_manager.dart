@@ -58,6 +58,11 @@ class DataManager {
     //TODO: DATABASE ADD
   }
 
+  Future<void> postSetFixedIncome({required double income}) async {
+    await Future.delayed(const Duration(seconds: 2));
+    //TODO: DATABASE ADD
+  }
+
   // END REGION POST
 
   // REGION PUT

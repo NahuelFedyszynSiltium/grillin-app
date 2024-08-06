@@ -57,7 +57,7 @@ class SimpleComponents {
               },
             ),
             _drawerItem(
-              icon: Icons.transfer_within_a_station_sharp,
+              icon: Icons.savings,
               label: KStrings.transferSavings,
               onTap: () {
                 key.currentState?.closeDrawer();
@@ -70,6 +70,14 @@ class SimpleComponents {
               onTap: () {
                 key.currentState?.closeDrawer();
                 PageManager().goChangePercentsPage();
+              },
+            ),
+            _drawerItem(
+              icon: Icons.edit_note,
+              label: KStrings.setFixedIncomes,
+              onTap: () {
+                key.currentState?.closeDrawer();
+                PageManager().goSetIncomePage();
               },
             ),
           ],

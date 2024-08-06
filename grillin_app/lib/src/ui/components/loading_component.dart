@@ -7,22 +7,9 @@ import 'package:flutter/material.dart';
 import '../../../values/k_colors.dart';
 
 class LoadingComponent extends StatefulWidget {
-  final Color color;
-  final double size;
-  final IndexedWidgetBuilder? itemBuilder;
-  final Duration duration;
-
   const LoadingComponent({
     super.key,
-    this.color = Colors.grey,
-    this.size = 50.0,
-    this.itemBuilder,
-    this.duration = const Duration(milliseconds: 2000),
-  })  : assert(
-            !(itemBuilder is IndexedWidgetBuilder && color is Color) &&
-                !(itemBuilder == null && color == null),
-            'You should specify either a itemBuilder or a color'),
-        assert(size != null);
+  });
 
   @override
   SpinKitChasingDotsState createState() => SpinKitChasingDotsState();
@@ -30,40 +17,18 @@ class LoadingComponent extends StatefulWidget {
 
 class SpinKitChasingDotsState extends State<LoadingComponent>
     with TickerProviderStateMixin {
-  late AnimationController _scaleCtrl, _rotateCtrl;
-  late Animation<double> _scale, _rotate;
-
   @override
   void initState() {
     super.initState();
-
-    _scaleCtrl = AnimationController(vsync: this, duration: widget.duration)
-      ..addListener(() => setState(() {}))
-      ..repeat(reverse: true);
-    _scale = Tween(begin: -1.0, end: 1.0)
-        .animate(CurvedAnimation(parent: _scaleCtrl, curve: Curves.easeInOut));
-
-    _rotateCtrl = AnimationController(vsync: this, duration: widget.duration)
-      ..addListener(() => setState(() {}))
-      ..repeat();
-    _rotate = Tween(begin: 0.0, end: 360.0)
-        .animate(CurvedAnimation(parent: _rotateCtrl, curve: Curves.linear));
-  }
-
-  @override
-  void dispose() {
-    _scaleCtrl.dispose();
-    _rotateCtrl.dispose();
-    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: SizedBox.fromSize(
-        size: Size.square(widget.size),
+        size: Size.square(MediaQuery.of(context).size.width * .2),
         child: const CircularProgressIndicator(
-          color: KColors.primary,
+          color: KColors.primaryL1,
         ),
       ),
     );
@@ -82,10 +47,7 @@ Widget loadingComponent(
       padding: padding ?? const EdgeInsets.all(0),
       color: Colors.transparent,
       alignment: Alignment.center,
-      child: LoadingComponent(
-        color: color ?? KColors.primary,
-        size: size,
-      ),
+      child: const LoadingComponent(),
     ),
   );
 }

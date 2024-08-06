@@ -34,6 +34,16 @@ class KStrings {
   static String changePercents = "Cambiar porcentajes";
   static String selectedTotalPercent = "Porcentaje total seleccionado";
 
+  static String setFixedIncome = "Setear ingreso fijo";
+  static String setFixedIncomeButtonString =
+      "Setear ingreso fijo y empezar nuevo ciclo";
+  static String setFixedIncomePageHint =
+      "Setea un ingreso fijo e inicia un nuevo ciclo para guardar todas las transacciones hasta el momento, y volver a calcular los porcentajes para un nuevo ciclo";
+  static String setFixedIncomes = "Setear ingresos fijos";
+  static String setFixedSetNewIncomeError =
+      "Ocurrió un error al intentar iniciar un nuevo ciclo";
+  static String setFixedSetNewIncomeSuccess = "Ciclo iniciado correctamente";
+
   //ERRORS REGION
   static String errorFailedToGetBoardData =
       "Ocurrió un error al obtener los balances actuales";

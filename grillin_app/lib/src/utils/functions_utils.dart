@@ -55,25 +55,30 @@ void showToast({
     padding: const EdgeInsets.only(bottom: 70),
     duration: duration,
     backgroundColor: Colors.transparent,
-    content: Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Flexible(
-          child: Container(
-            padding: padding,
-            decoration: BoxDecoration(
-                color: color ?? KColors.black,
-                borderRadius: borderRadius ?? BorderRadius.circular(5),
-                boxShadow: [KStyles().toastShadow]),
-            child: Text(
-              message,
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: fontSize, color: KColors.white),
-              maxLines: null,
+    content: Padding(
+      padding: EdgeInsets.only(
+          bottom:
+              MediaQuery.of(PageManager().currentContext).viewInsets.bottom),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Flexible(
+            child: Container(
+              padding: padding,
+              decoration: BoxDecoration(
+                  color: color ?? KColors.black,
+                  borderRadius: borderRadius ?? BorderRadius.circular(5),
+                  boxShadow: [KStyles().toastShadow]),
+              child: Text(
+                message,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: fontSize, color: KColors.white),
+                maxLines: null,
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     ),
   );
   ScaffoldMessenger.of(PageManager().currentContext).clearSnackBars();
