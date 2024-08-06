@@ -23,6 +23,12 @@ class KStyles {
     fontWeight: FontWeight.w400,
   );
 
+  static const TextStyle errorViewPlaceholderTextStyle = TextStyle(
+    fontSize: KValues.fontSizeLarge,
+    color: KColors.white,
+    fontWeight: FontWeight.w500,
+  );
+
   BoxShadow buttonShadow = BoxShadow(
     color: KColors.black.withOpacity(0.05),
     offset: const Offset(0, 2),
@@ -34,5 +40,19 @@ class KStyles {
     color: KColors.black.withOpacity(0.5),
     spreadRadius: 5,
     blurRadius: 20,
+  );
+
+  BoxShadow percentButtonShadow = const BoxShadow(
+    color: KColors.white,
+    spreadRadius: 1,
+    offset: Offset.zero,
+    blurRadius: 10,
+  );
+
+  BoxShadow toastShadow = BoxShadow(
+    color: KColors.white.withOpacity(0.5),
+    spreadRadius: 0.5,
+    offset: Offset.zero,
+    blurRadius: 10,
   );
 }

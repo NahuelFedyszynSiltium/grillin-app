@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 // Project imports:
+import '../../values/k_colors.dart';
+import '../../values/k_styles.dart';
 import '../managers/page_manager.dart';
 
 //Currency
@@ -40,7 +42,6 @@ BuildContext getCurrentContext() {
 
 //Toast
 void showToast({
-  required BuildContext context,
   required String message,
   Duration duration = const Duration(seconds: 2),
   EdgeInsets padding = const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
@@ -61,14 +62,13 @@ void showToast({
           child: Container(
             padding: padding,
             decoration: BoxDecoration(
-              color: color ??
-                  const Color.fromARGB(255, 126, 126, 126).withOpacity(0.7),
-              borderRadius: borderRadius ?? BorderRadius.circular(25),
-            ),
+                color: color ?? KColors.black,
+                borderRadius: borderRadius ?? BorderRadius.circular(5),
+                boxShadow: [KStyles().toastShadow]),
             child: Text(
               message,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: fontSize),
+              style: TextStyle(fontSize: fontSize, color: KColors.white),
               maxLines: null,
             ),
           ),
@@ -76,6 +76,6 @@ void showToast({
       ],
     ),
   );
-  ScaffoldMessenger.of(context).clearSnackBars();
-  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  ScaffoldMessenger.of(PageManager().currentContext).clearSnackBars();
+  ScaffoldMessenger.of(PageManager().currentContext).showSnackBar(snackBar);
 }

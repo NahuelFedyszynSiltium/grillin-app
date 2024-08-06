@@ -1,10 +1,6 @@
 import 'dart:math';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
-
 import '../../../values/k_colors.dart';
 import '../../../values/k_strings.dart';
 import '../../../values/k_styles.dart';
@@ -15,6 +11,7 @@ import '../../models/concept_model.dart';
 import '../../models/expense_model.dart';
 import '../../support/futuristic.dart';
 import '../../utils/functions_utils.dart';
+import '../components/button_component.dart';
 import 'loading_popup.dart';
 
 class AddExpensePopup extends StatefulWidget {
@@ -395,55 +392,10 @@ class AddExpensePopupState extends State<AddExpensePopup>
   }
 
   Widget _button() {
-    return GestureDetector(
-      onTap: _isEnabled ? _onAccept : () {},
-      child: Stack(
-        children: [
-          Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: widget.category.categoryColorBright(),
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: [KStyles().buttonShadow],
-            ),
-            child: const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-              child: Text(
-                KStrings.accept,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: KColors.white,
-                  fontSize: KValues.fontSizeMedium,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-          ),
-          Visibility(
-            visible: !_isEnabled,
-            child: Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: KColors.white.withOpacity(0.5),
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [KStyles().buttonShadow],
-              ),
-              child: const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-                child: Text(
-                  KStrings.accept,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: KColors.white,
-                    fontSize: KValues.fontSizeMedium,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
+    return ButtonComponent(
+      isEnabled: _isEnabled,
+      onAccept: _onAccept,
+      color: widget.category.categoryColorBright(),
     );
   }
 
@@ -451,7 +403,7 @@ class AddExpensePopupState extends State<AddExpensePopup>
     List<Widget> result = [];
     if (_conceptList.isNotEmpty) {
       for (ConceptModel element in _conceptList) {
-        if (element.id != null && element.name != null) {
+        if (element.id != null && element.name.isNotEmpty) {
           result.add(_chip(concept: element));
         }
       }
@@ -479,7 +431,7 @@ class AddExpensePopupState extends State<AddExpensePopup>
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
           child: Text(
-            concept.name!,
+            concept.name,
             style: const TextStyle(
               color: KColors.white,
               fontSize: KValues.fontSizeMedium,
@@ -538,7 +490,6 @@ class AddExpensePopupState extends State<AddExpensePopup>
 
   void _onAcceptFailure(err) {
     showToast(
-      context: context,
       message: KStrings.addExpenseFailure,
     );
   }
@@ -562,10 +513,10 @@ class AddExpensePopupState extends State<AddExpensePopup>
   }
 
   Future<void> _getConcepts() async {
-    //TODO: GET CONCEPTS FROM DATABASE
+    _conceptList =
+        await DataManager().getCategoryConcepts(category: widget.category);
+
     _conceptList.removeWhere((element) =>
-        element.id == null ||
-        element.name == null ||
-        element.name.toString().trim().isEmpty);
+        element.id == null || element.name.toString().trim().isEmpty);
   }
 }

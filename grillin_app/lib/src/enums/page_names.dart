@@ -1,5 +1,6 @@
 enum PageNames {
-  transferSaves,
+  changePercents,
   home,
   init,
+  transferSaves,
 }

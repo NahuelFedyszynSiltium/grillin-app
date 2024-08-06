@@ -30,4 +30,20 @@ class KStrings {
   static String totalSaves = "Ahorros totales";
 
   static String trasnferTo = "Transferir a";
+
+  static String changePercents = "Cambiar porcentajes";
+  static String selectedTotalPercent = "Porcentaje total seleccionado";
+
+  //ERRORS REGION
+  static String errorFailedToGetBoardData =
+      "Ocurrió un error al obtener los balances actuales";
+
+  static String errorFailedToGetPercents =
+      "Ocurrió un error al obtener los valores de porcentajes";
+  static String errorFailedToUpdatePercents =
+      "Ocurrió un error al intentar actualizar tus porcentajes";
+
+  //SUCCESS REGION
+  static String successUpdatedPercents =
+      "Porcentajes actualizados correctamente";
 }

@@ -6,6 +6,7 @@ class KColors {
   static const Color primaryL1 = Color.fromARGB(255, 24, 133, 33);
 
   static const Color red = Color(0XFFD91315);
+  static const Color redL1 = Color.fromARGB(255, 221, 92, 94);
 
   static const Color black = Color(0XFF000000);
   static const Color blackL1 = Color.fromARGB(255, 82, 82, 82);
@@ -20,4 +21,6 @@ class KColors {
 
   static const Color orange = Color.fromARGB(255, 187, 115, 7);
   static const Color orangeL1 = Color.fromARGB(255, 211, 156, 75);
+
+  static const Color gray = Color.fromARGB(255, 119, 119, 119);
 }

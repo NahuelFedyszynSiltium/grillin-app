@@ -8,6 +8,8 @@ import '../../../values/k_styles.dart';
 import '../../../values/k_values.dart';
 import '../../enums/category_enum.dart';
 import '../../utils/page_args.dart';
+import '../components/button_component.dart';
+import '../components/simple_components.dart';
 import '../page_controllers/transfer_saves_page_controller.dart';
 
 class TransferSavesPage extends StatefulWidget {
@@ -21,6 +23,7 @@ class TransferSavesPage extends StatefulWidget {
 class TransferSavesPageState extends StateMVC<TransferSavesPage> {
   late TransferSavesPageController _con;
   PageArgs? args;
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
 
   TransferSavesPageState() : super(TransferSavesPageController()) {
     _con = TransferSavesPageController.con;
@@ -45,6 +48,8 @@ class TransferSavesPageState extends StateMVC<TransferSavesPage> {
       canPop: false,
       child: SafeArea(
         child: Scaffold(
+          drawer: SimpleComponents().getDrawer(key: _key),
+          appBar: SimpleComponents.menuAppBar(key: _key),
           backgroundColor: KColors.primary,
           resizeToAvoidBottomInset: false,
           body: SizedBox(
@@ -141,7 +146,11 @@ class TransferSavesPageState extends StateMVC<TransferSavesPage> {
                       ),
                       SizedBox(
                           height: MediaQuery.of(context).size.height * .025),
-                      _button(),
+                      ButtonComponent(
+                        onAccept: _con.onAccept,
+                        color: CategoryEnum.saves.categoryColorBright(),
+                        isEnabled: _con.isEnabled,
+                      ),
                       SizedBox(
                           height: MediaQuery.of(context).size.height * .025),
                       SizedBox(
@@ -154,59 +163,6 @@ class TransferSavesPageState extends StateMVC<TransferSavesPage> {
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _button() {
-    return GestureDetector(
-      onTap: _con.isEnabled ? _con.onAccept : () {},
-      child: Stack(
-        children: [
-          Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: CategoryEnum.saves.categoryColorBright(),
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: [KStyles().buttonShadow],
-            ),
-            child: const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-              child: Text(
-                KStrings.accept,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: KColors.white,
-                  fontSize: KValues.fontSizeMedium,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-          ),
-          Visibility(
-            visible: !_con.isEnabled,
-            child: Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: KColors.white.withOpacity(0.5),
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: [KStyles().buttonShadow],
-              ),
-              child: const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-                child: Text(
-                  KStrings.accept,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: KColors.white,
-                    fontSize: KValues.fontSizeMedium,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }
@@ -282,8 +238,8 @@ class TransferSavesPageState extends StateMVC<TransferSavesPage> {
                   ? [
                       BoxShadow(
                         color: KColors.white.withOpacity(0.25),
-                        blurRadius: 5,
-                        spreadRadius: 10,
+                        blurRadius: 10,
+                        spreadRadius: 5,
                       ),
                     ]
                   : null),
