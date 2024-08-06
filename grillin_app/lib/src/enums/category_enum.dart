@@ -4,10 +4,14 @@ import '../../values/k_colors.dart';
 import '../../values/k_strings.dart';
 
 enum CategoryEnum {
-  dailys,
-  personals,
-  achievemnts,
-  saves,
+  dailys(0),
+  personals(1),
+  achievemnts(2),
+  saves(3);
+
+  final int value;
+
+  const CategoryEnum(this.value);
 }
 
 extension CategoryEnumExtension on CategoryEnum {
