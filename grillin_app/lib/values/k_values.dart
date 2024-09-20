@@ -11,5 +11,5 @@ class KValues {
   //OTHERS
   static const Duration splashDuration = Duration(seconds: 2);
 
-  static const double horizontalWidthScreenMultiplier = .05;
+  static const num horizontalWidthScreenMultiplier = .05;
 }

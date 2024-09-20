@@ -7,7 +7,7 @@ class ExpenseModel {
   late CategoryEnum category;
   late ConceptModel conceptModel;
   DateTime? createdAt;
-  late double amount;
+  late num amount;
 
   ExpenseModel({
     required this.conceptModel,
@@ -26,7 +26,8 @@ class ExpenseModel {
     );
     expenseId = json["expenseId"];
     cicleId = json["cicleId"];
-    createdAt = DateTime.tryParse(json["createdAt"]) ?? DateTime.now();
+    createdAt =
+        DateTime.tryParse(json["createdAt"].toString()) ?? DateTime.now();
   }
 
   Map<String, dynamic> toJson() => {
@@ -34,6 +35,6 @@ class ExpenseModel {
         "amount": amount,
         "categoryId": category.value,
         "cicleId": cicleId,
-        "createdAt": createdAt,
+        "createdAt": createdAt.toString(),
       };
 }

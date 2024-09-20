@@ -105,6 +105,8 @@ class KStrings {
   static const String errorsDefaultErrorMessage = "Ocurrió un error inesperado";
   static const String errorsDefaultEmptyDataErrorMessage =
       "No existen datos para mostrar";
+  static const String errorsSetFixedAmountFirst =
+      "Setea un ingreso fijo desde el menú para iniciar un ciclo";
 
   //SUCCESS
   static const String successDefaultSavedDataSuccesfullyMessage =

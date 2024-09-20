@@ -5,7 +5,7 @@ class CicleModel {
   late List<ExpenseModel> expenses;
   late DateTime createdAt;
   DateTime? endedAt;
-  late double fixedIncome;
+  late num fixedIncome;
 
   CicleModel({
     required this.createdAt,
@@ -15,18 +15,19 @@ class CicleModel {
   });
 
   CicleModel.fromJson(Map<String, dynamic> json) {
-    createdAt = DateTime.tryParse(json["createdAt"]) ?? DateTime.now();
+    createdAt =
+        DateTime.tryParse(json["createdAt"].toString()) ?? DateTime.now();
     expenses = json["expenses"] != null
         ? List<ExpenseModel>.from(
             json["expenses"].map((e) => ExpenseModel.fromJson(e)))
         : [];
     fixedIncome = json["fixedIncome"];
     cicleId = json["id"];
-    endedAt = DateTime.tryParse(json["endedAt"]);
+    endedAt = DateTime.tryParse(json["endedAt"].toString());
   }
 
   Map<String, dynamic> toJson() => {
-        "createdAt": createdAt,
+        "createdAt": createdAt.toString(),
         "expenses": expenses.isNotEmpty
             ? expenses
                 .map(
@@ -35,6 +36,6 @@ class CicleModel {
                 .toList()
             : [],
         "fixedIncome": fixedIncome,
-        "endedAt": endedAt,
+        "endedAt": endedAt.toString(),
       };
 }

@@ -21,7 +21,7 @@ class LoadingPopup {
     this.backgroundColor = const Color(0x80707070),
   });
 
-  final double radius = 20;
+  final num radius = 20;
 
   Future show() {
     return showDialog(

@@ -22,7 +22,6 @@ class SetIncomePage extends StatefulWidget {
 class SetIncomePageState extends StateMVC<SetIncomePage> {
   late SetIncomePageController _con;
   PageArgs? args;
-  final GlobalKey<ScaffoldState> _key = GlobalKey();
 
   SetIncomePageState() : super(SetIncomePageController()) {
     _con = SetIncomePageController.con;
@@ -47,8 +46,8 @@ class SetIncomePageState extends StateMVC<SetIncomePage> {
       canPop: false,
       child: SafeArea(
         child: Scaffold(
-          drawer: SimpleComponents().getDrawer(key: _key),
-          appBar: SimpleComponents.menuAppBar(key: _key),
+          drawer: SimpleComponents().getDrawer(context: context),
+          appBar: SimpleComponents.menuAppBar(context: context),
           backgroundColor: KColors.primary,
           resizeToAvoidBottomInset: false,
           body: Stack(

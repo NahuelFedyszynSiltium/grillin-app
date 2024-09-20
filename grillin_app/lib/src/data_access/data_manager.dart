@@ -13,10 +13,14 @@ import '../models/responses/total_expenses_by_category_response_model.dart';
 import 'sqlite_helper.dart';
 
 enum _TableNames {
-  categories,
-  cicles,
-  concepts,
-  expenses,
+  categories("categories"),
+  cicles("cicles"),
+  concepts("concepts"),
+  expenses("expenses");
+
+  final String tableName;
+
+  const _TableNames(this.tableName);
 }
 
 enum OrderCriteria {
@@ -57,11 +61,13 @@ class DataManager {
 
   DataManager._constructor();
 
-  Future<void> init() async {}
+  Future<void> init() async {
+    await SqliteHelper().init();
+  }
 
   Future closeCicle({required int cicleId}) async {
     await _database.update(
-      _TableNames.cicles.toString(),
+      _TableNames.cicles.tableName,
       {
         "endedAt": DateTime.now().toString(),
       },
@@ -76,28 +82,28 @@ class DataManager {
       List<TotalExpensesByCategoryResponseModel> totalPerCategory =
           await getTotalExpensesByCategory(cicleId: cicleModel!.cicleId!);
 
-      double dailysExpenses = totalPerCategory.isNotEmpty
+      num dailysExpenses = totalPerCategory.isNotEmpty
           ? (totalPerCategory
                   .firstWhereOrNull(
                       (element) => element.categoryEnum == CategoryEnum.dailys)
                   ?.amount ??
               0)
           : 0;
-      double personalsExpenses = totalPerCategory.isNotEmpty
+      num personalsExpenses = totalPerCategory.isNotEmpty
           ? (totalPerCategory
                   .firstWhereOrNull((element) =>
                       element.categoryEnum == CategoryEnum.personals)
                   ?.amount ??
               0)
           : 0;
-      double achievementsExpenses = totalPerCategory.isNotEmpty
+      num achievementsExpenses = totalPerCategory.isNotEmpty
           ? (totalPerCategory
                   .firstWhereOrNull((element) =>
                       element.categoryEnum == CategoryEnum.achievements)
                   ?.amount ??
               0)
           : 0;
-      double saves = totalPerCategory.isNotEmpty
+      num saves = totalPerCategory.isNotEmpty
           ? (totalPerCategory
                   .firstWhereOrNull(
                       (element) => element.categoryEnum == CategoryEnum.saves)
@@ -105,7 +111,7 @@ class DataManager {
               0)
           : 0;
 
-      double remainingDailys = (cicleModel.fixedIncome *
+      num remainingDailys = (cicleModel.fixedIncome *
               ((categories
                       .firstWhereOrNull((element) =>
                           element.categoryEnum == CategoryEnum.dailys)
@@ -118,7 +124,7 @@ class DataManager {
                       (element) => element.categoryEnum == CategoryEnum.dailys)
                   ?.addFromSavings ??
               0);
-      double remainingPersonals = (cicleModel.fixedIncome *
+      num remainingPersonals = (cicleModel.fixedIncome *
               ((categories
                       .firstWhereOrNull((element) =>
                           element.categoryEnum == CategoryEnum.personals)
@@ -131,7 +137,7 @@ class DataManager {
                       element.categoryEnum == CategoryEnum.personals)
                   ?.addFromSavings ??
               0);
-      double remainingAchievements = (cicleModel.fixedIncome *
+      num remainingAchievements = (cicleModel.fixedIncome *
               ((categories
                       .firstWhereOrNull((element) =>
                           element.categoryEnum == CategoryEnum.achievements)
@@ -173,7 +179,7 @@ class DataManager {
 
   Future<List<CategoryResponseModel>> getCategories() async {
     List<Map<String, dynamic>> result =
-        await _database.query(_TableNames.categories.toString());
+        await _database.query(_TableNames.categories.tableName);
     if (result.isNotEmpty) {
       return List<CategoryResponseModel>.from(
           result.map((e) => CategoryResponseModel.fromJson(e)));
@@ -184,7 +190,7 @@ class DataManager {
 
   Future<CicleModel?> getCicle({required int cicleId}) async {
     List<Map<String, dynamic>> result = await _database.query(
-      _TableNames.cicles.toString(),
+      _TableNames.cicles.tableName,
       where: "cicleId",
       limit: 1,
     );
@@ -198,7 +204,7 @@ class DataManager {
 
   Future<List<CicleModel>> getCicles() async {
     List<Map<String, dynamic>> result = await _database.query(
-      _TableNames.cicles.toString(),
+      _TableNames.cicles.tableName,
     );
     if (result.isNotEmpty) {
       return List<CicleModel>.from(result.map((e) => CicleModel.fromJson(e)));
@@ -210,7 +216,7 @@ class DataManager {
   Future<List<ConceptModel>> getConceptsByCategory(
       {required CategoryEnum categoryEnum}) async {
     List<Map<String, dynamic>> result = await _database.query(
-        _TableNames.concepts.toString(),
+        _TableNames.concepts.tableName,
         where: "categoryId = ${categoryEnum.value}");
     if (result.isNotEmpty) {
       return List<ConceptModel>.from(
@@ -222,7 +228,7 @@ class DataManager {
 
   Future<CicleModel?> getCurrentCicle() async {
     List<Map<String, dynamic>> result = await _database.query(
-      _TableNames.cicles.toString(),
+      _TableNames.cicles.tableName,
       orderBy: "cicleId DESC",
       limit: 1,
     );
@@ -256,7 +262,7 @@ class DataManager {
     }
 
     List<Map<String, dynamic>> result = await _database.query(
-      _TableNames.expenses.toString(),
+      _TableNames.expenses.tableName,
       where: buildWhere(),
       orderBy: filterModel?.getOrderBy(),
     );
@@ -284,7 +290,7 @@ class DataManager {
   Future<void> insertConcept({required ConceptModel conceptModel}) async {
     conceptModel.createdAt = DateTime.now();
     await _database.insert(
-        _TableNames.concepts.toString(), conceptModel.toJson());
+        _TableNames.concepts.tableName, conceptModel.toJson());
   }
 
   Future<void> insertExpense({required ExpenseModel expenseModel}) async {
@@ -293,19 +299,19 @@ class DataManager {
     }
     expenseModel.createdAt = DateTime.now();
     await _database.insert(
-      _TableNames.expenses.toString(),
+      _TableNames.expenses.tableName,
       expenseModel.toJson(),
     );
   }
 
-  Future<CicleModel> startNewCicle({required double fixedIncome}) async {
+  Future<CicleModel> startNewCicle({required num fixedIncome}) async {
     try {
       CicleModel? currentCicle = await getCurrentCicle();
       if (currentCicle?.cicleId != null) {
         await closeCicle(cicleId: currentCicle!.cicleId!);
       }
       int result = await _database.insert(
-          _TableNames.cicles.toString(),
+          _TableNames.cicles.tableName,
           CicleModel(
             createdAt: DateTime.now(),
             expenses: [],

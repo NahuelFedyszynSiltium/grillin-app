@@ -5,9 +5,9 @@ import '../concept_model.dart';
 
 class CicleGraphResponseModel {
   late int cicleId;
-  late double totalExpenses;
-  late double totalSaves;
-  late double totalIncome;
+  late num totalExpenses;
+  late num totalSaves;
+  late num totalIncome;
   late _CicleCategoriesModel savingsTotal;
   late _CicleCategoriesModel personalsTotal;
   late _CicleCategoriesModel dailysTotal;
@@ -30,15 +30,15 @@ class CicleGraphResponseModel {
     comparisonCicle = json["comparisonCicle"] != null
         ? CicleGraphResponseModel.fromJson(json["comparisonCicle"])
         : null;
-    from = DateTime.parse(json["from"]);
-    to = DateTime.tryParse(json["to"]);
+    from = DateTime.parse(json["from"].toString());
+    to = DateTime.tryParse(json["to"].toString());
   }
 }
 
 class _CicleCategoriesModel {
   late int cicleCategoriesId;
   late CategoryEnum categoryEnum;
-  late double total;
+  late num total;
   late List<_CategoriesConceptsModel> categoriesConcepts;
 
   _CicleCategoriesModel.fromJson(Map<String, dynamic> json) {
@@ -58,7 +58,7 @@ class _CicleCategoriesModel {
 
 class _CategoriesConceptsModel {
   late int categoriesConceptId;
-  late double total;
+  late num total;
   late ConceptModel concept;
 
   _CategoriesConceptsModel.fromJson(Map<String, dynamic> json) {

@@ -72,6 +72,11 @@ class HomePageController extends ControllerMVC implements IViewController {
     forceUpdate = false;
     try {
       boardDataModel = await DataManager().getBoardData();
+      if (boardDataModel == null) {
+        showToast(
+            message: KStrings.errorsSetFixedAmountFirst,
+            duration: const Duration(seconds: 3));
+      }
     } catch (err) {
       showToast(message: KStrings.homeErrorFailedToGetBoardData);
     }

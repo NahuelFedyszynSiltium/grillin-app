@@ -25,7 +25,6 @@ class HistoryPage extends StatefulWidget {
 class HistoryPageState extends StateMVC<HistoryPage> {
   late HistoryPageController _con;
   PageArgs? args;
-  final GlobalKey<ScaffoldState> _key = GlobalKey();
 
   HistoryPageState() : super(HistoryPageController()) {
     _con = HistoryPageController.con;
@@ -51,8 +50,8 @@ class HistoryPageState extends StateMVC<HistoryPage> {
       child: SafeArea(
         child: Scaffold(
           resizeToAvoidBottomInset: true,
-          appBar: SimpleComponents.menuAppBar(key: _key),
-          drawer: SimpleComponents().getDrawer(key: _key),
+          appBar: SimpleComponents.menuAppBar(context: context),
+          drawer: SimpleComponents().getDrawer(context: context),
           backgroundColor: KColors.primary,
           body: Padding(
             padding: EdgeInsets.symmetric(

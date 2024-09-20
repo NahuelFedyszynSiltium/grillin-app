@@ -18,13 +18,14 @@ class ConceptModel {
       orElse: () => CategoryEnum.personals,
     );
     name = json["name"];
-    createdAt = DateTime.tryParse(json["createdAt"]) ?? DateTime.now();
+    createdAt =
+        DateTime.tryParse(json["createdAt"].toString()) ?? DateTime.now();
     conceptId = json["conceptId"];
   }
 
   Map<String, dynamic> toJson() => {
         "categoryId": category.value,
         "name": name,
-        "createdAt": createdAt,
+        "createdAt": createdAt.toString(),
       };
 }

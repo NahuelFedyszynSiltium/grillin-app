@@ -2,7 +2,7 @@ import '../../enums/category_enum.dart';
 
 class TotalExpensesByCategoryResponseModel {
   late int categoryId;
-  late double amount;
+  late num amount;
 
   TotalExpensesByCategoryResponseModel.fromJson(Map<String, dynamic> json) {
     categoryId = json["categoryId"];

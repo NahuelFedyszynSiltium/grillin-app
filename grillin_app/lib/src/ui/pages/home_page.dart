@@ -29,7 +29,6 @@ class HomePage extends StatefulWidget {
 class HomePagePageState extends StateMVC<HomePage> {
   late HomePageController _con;
   PageArgs? args;
-  final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
 
   HomePagePageState() : super(HomePageController()) {
     _con = HomePageController.con;
@@ -44,15 +43,14 @@ class HomePagePageState extends StateMVC<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    log(_key.currentState.toString());
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (didPop, data) => _con.onBack(didPop, context),
       child: SafeArea(
         child: Scaffold(
-          appBar: SimpleComponents.menuAppBar(key: _key),
+          appBar: SimpleComponents.menuAppBar(context: context),
           resizeToAvoidBottomInset: false,
-          drawer: SimpleComponents().getDrawer(key: _key),
+          drawer: SimpleComponents().getDrawer(context: context),
           backgroundColor: KColors.primary,
           body: RefreshIndicator(
             onRefresh: _con.onRefreshIndicator,
@@ -131,7 +129,7 @@ class HomePagePageState extends StateMVC<HomePage> {
 
   Widget _card({
     required CategoryEnum category,
-    required double? amount,
+    required num? amount,
     int? percent,
   }) {
     return GestureDetector(

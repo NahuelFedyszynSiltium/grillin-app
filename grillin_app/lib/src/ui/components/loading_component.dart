@@ -38,7 +38,7 @@ class SpinKitChasingDotsState extends State<LoadingComponent>
 Widget loadingComponent(
   bool isVisible, {
   Color? color,
-  double size = 50,
+  num size = 50,
   EdgeInsetsGeometry? padding,
 }) {
   return Visibility(

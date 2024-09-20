@@ -23,7 +23,6 @@ class TransferSavesPage extends StatefulWidget {
 class TransferSavesPageState extends StateMVC<TransferSavesPage> {
   late TransferSavesPageController _con;
   PageArgs? args;
-  final GlobalKey<ScaffoldState> _key = GlobalKey();
 
   TransferSavesPageState() : super(TransferSavesPageController()) {
     _con = TransferSavesPageController.con;
@@ -48,8 +47,8 @@ class TransferSavesPageState extends StateMVC<TransferSavesPage> {
       canPop: false,
       child: SafeArea(
         child: Scaffold(
-          drawer: SimpleComponents().getDrawer(key: _key),
-          appBar: SimpleComponents.menuAppBar(key: _key),
+          drawer: SimpleComponents().getDrawer(context: context),
+          appBar: SimpleComponents.menuAppBar(context: context),
           backgroundColor: KColors.primary,
           resizeToAvoidBottomInset: false,
           body: SizedBox(

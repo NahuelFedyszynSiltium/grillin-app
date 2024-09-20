@@ -10,7 +10,7 @@ class TransferSavesPageController extends ControllerMVC
     implements IViewController {
   static late TransferSavesPageController _this;
 
-  double totalSaves = 123456789.12;
+  num totalSaves = 123456789.12;
 
   bool get isEnabled {
     return amountController.text.trim().isNotEmpty &&

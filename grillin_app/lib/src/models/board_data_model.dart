@@ -1,11 +1,11 @@
 class BoardDataModel {
-  late double dailyRemainingAmount;
-  late double achievementRemainingAmount;
-  late double personalRemainingAmount;
+  late num dailyRemainingAmount;
+  late num achievementRemainingAmount;
+  late num personalRemainingAmount;
   late int dailyPercent;
   late int achievementPercent;
   late int personalPercent;
-  late double savesAmount;
+  late num savesAmount;
 
   BoardDataModel({
     required this.achievementRemainingAmount,

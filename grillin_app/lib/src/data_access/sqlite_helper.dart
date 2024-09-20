@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:path/path.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
@@ -12,6 +14,8 @@ class SqliteHelper {
   }
 
   SqliteHelper._constructor();
+
+  static const String _databaseName = "grillin.db";
 
   static const String _categoryTableCreate =
       "CREATE TABLE categories (	categoryId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,	categoryName TEXT NOT NULL,	percentValue INTEGER,	addFromSavings NUMERIC)";
@@ -30,18 +34,18 @@ class SqliteHelper {
 
   init() async {
     sqfliteFfiInit();
-    DatabaseFactory databaseFactory = databaseFactoryFfi;
-    String dir = await getDatabasesPath();
-    String path = join(dir, 'grillin.db');
+    final String databasesPath = await getDatabasesPath();
+    // String dir = await getDatabasesPath();
+    String path = join(databasesPath, _databaseName);
 
-    database = await databaseFactory.openDatabase(
-      path,
-      options: OpenDatabaseOptions(
-        version: dbVersion,
-        onCreate: (db, version) => _onCreate(db, version),
-        onUpgrade: (db, oldVersion, newVersion) =>
-            _onUpgrade(db, oldVersion, newVersion),
-      ),
+    try {
+      await Directory(databasesPath).create(recursive: true);
+    } catch (_) {}
+
+    database = await openDatabase(
+      _databaseName,
+      version: 1,
+      onCreate: (db, version) => _onCreate(db, version),
     );
 
     // await db.close();
@@ -54,6 +58,4 @@ class SqliteHelper {
     await db.execute(_expensesTableCreate);
     await db.execute(_insertCategories);
   }
-
-  _onUpgrade(Database db, int oldVersion, int newVersion) async {}
 }

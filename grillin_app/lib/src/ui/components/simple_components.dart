@@ -7,24 +7,28 @@ import '../../../values/k_values.dart';
 import '../../managers/page_manager.dart';
 
 class SimpleComponents {
-  static AppBar menuAppBar({required final GlobalKey<ScaffoldState> key}) =>
-      AppBar(
+  static AppBar menuAppBar({required BuildContext context}) => AppBar(
         backgroundColor: KColors.primary,
         automaticallyImplyLeading: false,
-        leading: GestureDetector(
-          onTap: () {
-            log(key.currentState.toString());
-            key.currentState?.openDrawer();
-          },
-          child: const SizedBox(
-            height: 50,
-            width: 50,
-            child: Icon(
-              Icons.menu,
-              color: KColors.white,
+        leading: Builder(builder: (context) {
+          return GestureDetector(
+            onTap: () {
+              try {
+                Scaffold.of(context).openDrawer();
+              } catch (err) {
+                log(err.toString());
+              }
+            },
+            child: const SizedBox(
+              height: 50,
+              width: 50,
+              child: Icon(
+                Icons.menu,
+                color: KColors.white,
+              ),
             ),
-          ),
-        ),
+          );
+        }),
       );
 
   static AppBar backAppBar({Function()? onBack}) => AppBar(
@@ -43,66 +47,92 @@ class SimpleComponents {
         ),
       );
 
-  Drawer getDrawer({required final GlobalKey<ScaffoldState> key}) => Drawer(
+  Drawer getDrawer({required BuildContext context}) => Drawer(
         shape: const BeveledRectangleBorder(),
         backgroundColor: KColors.primary,
-        child: ListView(
-          physics: const BouncingScrollPhysics(),
-          children: [
-            SizedBox(
-                height:
-                    MediaQuery.of(PageManager().currentContext).size.height *
-                        .05),
-            _drawerItem(
-              icon: Icons.dashboard,
-              label: KStrings.board,
-              onTap: () {
-                key.currentState?.closeDrawer();
-                PageManager().goHomePage();
-              },
-            ),
-            _drawerItem(
-              icon: Icons.savings,
-              label: KStrings.transferSavings,
-              onTap: () {
-                key.currentState?.closeDrawer();
-                PageManager().goTransferSavesPage();
-              },
-            ),
-            _drawerItem(
-              icon: Icons.percent,
-              label: KStrings.changePercents,
-              onTap: () {
-                key.currentState?.closeDrawer();
-                PageManager().goChangePercentsPage();
-              },
-            ),
-            _drawerItem(
-              icon: Icons.edit_note,
-              label: KStrings.setFixedIncomes,
-              onTap: () {
-                key.currentState?.closeDrawer();
-                PageManager().goSetIncomePage();
-              },
-            ),
-            _drawerItem(
-              icon: Icons.bar_chart,
-              label: KStrings.graphs,
-              onTap: () {
-                key.currentState?.closeDrawer();
-                PageManager().goGraphsPage();
-              },
-            ),
-            _drawerItem(
-              icon: Icons.history,
-              label: KStrings.history,
-              onTap: () {
-                key.currentState?.closeDrawer();
-                PageManager().goHistoryPage();
-              },
-            ),
-          ],
-        ),
+        child: Builder(builder: (context) {
+          return ListView(
+            physics: const BouncingScrollPhysics(),
+            children: [
+              SizedBox(
+                  height:
+                      MediaQuery.of(PageManager().currentContext).size.height *
+                          .05),
+              _drawerItem(
+                icon: Icons.dashboard,
+                label: KStrings.board,
+                onTap: () {
+                  try {
+                    Scaffold.of(context).openDrawer();
+                  } catch (err) {
+                    log(err.toString());
+                  }
+                  PageManager().goHomePage();
+                },
+              ),
+              _drawerItem(
+                icon: Icons.savings,
+                label: KStrings.transferSavings,
+                onTap: () {
+                  try {
+                    Scaffold.of(context).openDrawer();
+                  } catch (err) {
+                    log(err.toString());
+                  }
+                  PageManager().goTransferSavesPage();
+                },
+              ),
+              _drawerItem(
+                icon: Icons.percent,
+                label: KStrings.changePercents,
+                onTap: () {
+                  try {
+                    Scaffold.of(context).openDrawer();
+                  } catch (err) {
+                    log(err.toString());
+                  }
+                  PageManager().goChangePercentsPage();
+                },
+              ),
+              _drawerItem(
+                icon: Icons.edit_note,
+                label: KStrings.setFixedIncomes,
+                onTap: () {
+                  try {
+                    Scaffold.of(context).openDrawer();
+                  } catch (err) {
+                    log(err.toString());
+                  }
+                  PageManager().goSetIncomePage();
+                },
+              ),
+              _drawerItem(
+                icon: Icons.bar_chart,
+                label: KStrings.graphs,
+                onTap: () {
+                  try {
+                    Scaffold.of(context).openDrawer();
+                  } catch (err) {
+                    log(err.toString());
+                  }
+                  PageManager().goGraphsPage();
+                },
+              ),
+              _drawerItem(
+                icon: Icons.history,
+                label: KStrings.history,
+                onTap: () {
+                  try {
+                    Scaffold.of(context).openDrawer();
+                  } catch (err) {
+                    log(err.toString());
+                  }
+                  PageManager().goHistoryPage();
+                },
+              ),
+            ],
+          );
+        }),
       );
 
   Widget _drawerItem(

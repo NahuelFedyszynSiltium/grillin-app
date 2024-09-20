@@ -23,7 +23,6 @@ class GraphsPage extends StatefulWidget {
 class GraphsPageState extends StateMVC<GraphsPage> {
   late GraphsPageController _con;
   PageArgs? args;
-  final GlobalKey<ScaffoldState> _key = GlobalKey();
 
   GraphsPageState() : super(GraphsPageController()) {
     _con = GraphsPageController.con;
@@ -48,8 +47,8 @@ class GraphsPageState extends StateMVC<GraphsPage> {
       canPop: false,
       child: SafeArea(
         child: Scaffold(
-          appBar: SimpleComponents.menuAppBar(key: _key),
-          drawer: SimpleComponents().getDrawer(key: _key),
+          appBar: SimpleComponents.menuAppBar(context: context),
+          drawer: SimpleComponents().getDrawer(context: context),
           backgroundColor: KColors.primary,
           body: Padding(
             padding: EdgeInsets.symmetric(

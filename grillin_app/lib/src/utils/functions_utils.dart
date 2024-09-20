@@ -10,7 +10,7 @@ import '../../values/k_styles.dart';
 import '../managers/page_manager.dart';
 
 //Currency
-String currencyFormat(double? price) {
+String currencyFormat(num? price) {
   return price != null ? NumberFormat("#,##0.00", "en_US").format(price) : "-";
 }
 

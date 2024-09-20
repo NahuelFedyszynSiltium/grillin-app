@@ -24,7 +24,6 @@ class ChangePercentsPage extends StatefulWidget {
 class ChangePercentsPageState extends StateMVC<ChangePercentsPage> {
   late ChangePercentsPageController _con;
   PageArgs? args;
-  final GlobalKey<ScaffoldState> _key = GlobalKey();
 
   ChangePercentsPageState() : super(ChangePercentsPageController()) {
     _con = ChangePercentsPageController.con;
@@ -51,8 +50,8 @@ class ChangePercentsPageState extends StateMVC<ChangePercentsPage> {
         child: Scaffold(
           resizeToAvoidBottomInset: false,
           backgroundColor: KColors.primary,
-          appBar: SimpleComponents.menuAppBar(key: _key),
-          drawer: SimpleComponents().getDrawer(key: _key),
+          appBar: SimpleComponents.menuAppBar(context: context),
+          drawer: SimpleComponents().getDrawer(context: context),
           body: Padding(
             padding: EdgeInsets.symmetric(
                 horizontal: MediaQuery.of(context).size.width * 0.02),
