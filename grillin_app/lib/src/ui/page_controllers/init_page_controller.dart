@@ -1,12 +1,14 @@
 // Package imports:
+import 'dart:developer';
+
 import 'package:flutter/services.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 // Project imports:
 import '../../../src/managers/page_manager.dart';
 import '../../../values/k_values.dart';
+import '../../data_access/data_manager.dart';
 import '../../interfaces/i_view_controller.dart';
-import '../../managers/data_manager.dart';
 import '../../providers/app_provider.dart';
 import '../../utils/page_args.dart';
 
@@ -38,5 +40,6 @@ class InitPageController extends ControllerMVC implements IViewController {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: SystemUiOverlay.values);
     PageManager().goHomePage();
+    log(DateTime.now().toString());
   }
 }

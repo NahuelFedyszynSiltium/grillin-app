@@ -1,26 +1,19 @@
-import 'percents_category_response_model.dart';
-
 class BoardDataModel {
   late double dailyRemainingAmount;
-  late double achievemtnRemainingAmount;
+  late double achievementRemainingAmount;
   late double personalRemainingAmount;
+  late int dailyPercent;
+  late int achievementPercent;
+  late int personalPercent;
   late double savesAmount;
-  late PercentsCategoryResponseModel percentsCategoryResponseModel;
 
   BoardDataModel({
-    required this.percentsCategoryResponseModel,
-    required this.achievemtnRemainingAmount,
+    required this.achievementRemainingAmount,
     required this.dailyRemainingAmount,
     required this.personalRemainingAmount,
+    required this.achievementPercent,
+    required this.dailyPercent,
+    required this.personalPercent,
     required this.savesAmount,
   });
-
-  BoardDataModel.fromJson(Map<String, dynamic> json) {
-    dailyRemainingAmount = json["dailyRemainingAmount"];
-    achievemtnRemainingAmount = json["achievemtnRemainingAmount"];
-    personalRemainingAmount = json["personalRemainingAmount"];
-    savesAmount = json["savesAmount"];
-    percentsCategoryResponseModel = PercentsCategoryResponseModel.fromJson(
-        json["percentsCategoryResponseModel"]);
-  }
 }

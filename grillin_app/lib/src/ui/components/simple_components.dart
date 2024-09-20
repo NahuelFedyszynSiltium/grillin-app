@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import '../../../values/k_colors.dart';
 import '../../../values/k_strings.dart';
@@ -10,7 +12,10 @@ class SimpleComponents {
         backgroundColor: KColors.primary,
         automaticallyImplyLeading: false,
         leading: GestureDetector(
-          onTap: key.currentState?.openDrawer,
+          onTap: () {
+            log(key.currentState.toString());
+            key.currentState?.openDrawer();
+          },
           child: const SizedBox(
             height: 50,
             width: 50,
@@ -78,6 +83,14 @@ class SimpleComponents {
               onTap: () {
                 key.currentState?.closeDrawer();
                 PageManager().goSetIncomePage();
+              },
+            ),
+            _drawerItem(
+              icon: Icons.bar_chart,
+              label: KStrings.graphs,
+              onTap: () {
+                key.currentState?.closeDrawer();
+                PageManager().goGraphsPage();
               },
             ),
             _drawerItem(

@@ -44,7 +44,7 @@ class TransferSavesPageState extends StateMVC<TransferSavesPage> {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      onPopInvoked: _con.onPopInvoked,
+      onPopInvokedWithResult: _con.onPopInvoked,
       canPop: false,
       child: SafeArea(
         child: Scaffold(
@@ -85,10 +85,10 @@ class TransferSavesPageState extends StateMVC<TransferSavesPage> {
                               SizedBox(
                                   height: MediaQuery.of(context).size.height *
                                       .025),
-                              Text(
-                                KStrings.totalSaves,
+                              const Text(
+                                KStrings.transferSavingsTotalSaves,
                                 textAlign: TextAlign.center,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   color: KColors.white,
                                   fontSize: KValues.fontSizeLargeXL,
                                 ),
@@ -107,10 +107,10 @@ class TransferSavesPageState extends StateMVC<TransferSavesPage> {
                               SizedBox(
                                   height: MediaQuery.of(context).size.height *
                                       .025),
-                              Text(
-                                "${KStrings.trasnferTo}:",
+                              const Text(
+                                "${KStrings.transferSavingsTransferTo}:",
                                 textAlign: TextAlign.center,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   color: KColors.white,
                                   fontSize: KValues.fontSizeLargeXL,
                                 ),
@@ -127,7 +127,7 @@ class TransferSavesPageState extends StateMVC<TransferSavesPage> {
                                   height: MediaQuery.of(context).size.height *
                                       0.02),
                               _categoryButton(
-                                  category: CategoryEnum.achievemnts),
+                                  category: CategoryEnum.achievements),
                               SizedBox(
                                   height:
                                       MediaQuery.of(context).size.height * .05),

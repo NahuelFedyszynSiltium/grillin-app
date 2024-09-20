@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'dart:developer';
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
@@ -28,7 +29,7 @@ class HomePage extends StatefulWidget {
 class HomePagePageState extends StateMVC<HomePage> {
   late HomePageController _con;
   PageArgs? args;
-  final GlobalKey<ScaffoldState> _key = GlobalKey();
+  final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
 
   HomePagePageState() : super(HomePageController()) {
     _con = HomePageController.con;
@@ -37,14 +38,16 @@ class HomePagePageState extends StateMVC<HomePage> {
   @override
   void initState() {
     _con.initPage(arguments: widget.args);
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    log(_key.currentState.toString());
     return PopScope(
       canPop: false,
-      onPopInvoked: (didPop) => _con.onBack(didPop, context),
+      onPopInvokedWithResult: (didPop, data) => _con.onBack(didPop, context),
       child: SafeArea(
         child: Scaffold(
           appBar: SimpleComponents.menuAppBar(key: _key),
@@ -85,8 +88,7 @@ class HomePagePageState extends StateMVC<HomePage> {
                             _card(
                               category: CategoryEnum.dailys,
                               amount: _con.boardDataModel?.dailyRemainingAmount,
-                              percent: _con.boardDataModel
-                                  ?.percentsCategoryResponseModel.dailysPercent,
+                              percent: _con.boardDataModel?.dailyPercent,
                             ),
                             SizedBox(
                                 height: MediaQuery.of(context).size.height *
@@ -95,22 +97,16 @@ class HomePagePageState extends StateMVC<HomePage> {
                               category: CategoryEnum.personals,
                               amount:
                                   _con.boardDataModel?.personalRemainingAmount,
-                              percent: _con
-                                  .boardDataModel
-                                  ?.percentsCategoryResponseModel
-                                  .personalsPercent,
+                              percent: _con.boardDataModel?.personalPercent,
                             ),
                             SizedBox(
                                 height: MediaQuery.of(context).size.height *
                                     0.0125),
                             _card(
-                              category: CategoryEnum.achievemnts,
+                              category: CategoryEnum.achievements,
                               amount: _con
-                                  .boardDataModel?.achievemtnRemainingAmount,
-                              percent: _con
-                                  .boardDataModel
-                                  ?.percentsCategoryResponseModel
-                                  .achievemntsPercent,
+                                  .boardDataModel?.achievementRemainingAmount,
+                              percent: _con.boardDataModel?.achievementPercent,
                             ),
                             SizedBox(
                                 height: MediaQuery.of(context).size.height *

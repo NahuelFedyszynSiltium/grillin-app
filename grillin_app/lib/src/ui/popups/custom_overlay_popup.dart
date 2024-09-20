@@ -5,8 +5,8 @@ import '../../../values/k_colors.dart';
 import '../../../values/k_strings.dart';
 import '../../../values/k_styles.dart';
 import '../../../values/k_values.dart';
+import '../../data_access/data_manager.dart';
 import '../../enums/category_enum.dart';
-import '../../managers/data_manager.dart';
 import '../../models/concept_model.dart';
 import '../../models/expense_model.dart';
 import '../../support/futuristic.dart';
@@ -127,7 +127,7 @@ class AddExpensePopupState extends State<AddExpensePopup>
                             top: MediaQuery.of(context).size.height * .01,
                           ),
                           child: const Text(
-                            "${KStrings.savesExpenseHint}:",
+                            "${KStrings.expensesSavesExpenseHint}:",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: KValues.fontSizeSmall,
@@ -263,7 +263,7 @@ class AddExpensePopupState extends State<AddExpensePopup>
                 children: [
                   const Expanded(
                     child: Text(
-                      KStrings.addNewConcept,
+                      KStrings.expensesAddNewConcept,
                       textAlign: TextAlign.left,
                       style: TextStyle(
                         fontSize: KValues.fontSizeMedium,
@@ -403,7 +403,7 @@ class AddExpensePopupState extends State<AddExpensePopup>
     List<Widget> result = [];
     if (_conceptList.isNotEmpty) {
       for (ConceptModel element in _conceptList) {
-        if (element.id != null && element.name.isNotEmpty) {
+        if (element.conceptId != null && element.name.isNotEmpty) {
           result.add(_chip(concept: element));
         }
       }
@@ -419,7 +419,7 @@ class AddExpensePopupState extends State<AddExpensePopup>
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         decoration: BoxDecoration(
-          color: concept.id == _selectedConcept?.id
+          color: concept.conceptId == _selectedConcept?.conceptId
               ? widget.category.categoryColor()
               : Colors.transparent,
           border: Border.all(
@@ -481,7 +481,7 @@ class AddExpensePopupState extends State<AddExpensePopup>
       );
     }
 
-    return await DataManager().postAddNewExpense(expenseModel: newExpense);
+    return await DataManager().insertExpense(expenseModel: newExpense);
   }
 
   void _onAcceptSuccess(data) {
@@ -490,7 +490,7 @@ class AddExpensePopupState extends State<AddExpensePopup>
 
   void _onAcceptFailure(err) {
     showToast(
-      message: KStrings.addExpenseFailure,
+      message: KStrings.expensesAddExpenseFailure,
     );
   }
 
@@ -513,10 +513,10 @@ class AddExpensePopupState extends State<AddExpensePopup>
   }
 
   Future<void> _getConcepts() async {
-    _conceptList =
-        await DataManager().getCategoryConcepts(category: widget.category);
+    _conceptList = await DataManager()
+        .getConceptsByCategory(categoryEnum: widget.category);
 
     _conceptList.removeWhere((element) =>
-        element.id == null || element.name.toString().trim().isEmpty);
+        element.conceptId == null || element.name.toString().trim().isEmpty);
   }
 }

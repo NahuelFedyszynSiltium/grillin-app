@@ -42,7 +42,7 @@ class TransferSavesPageController extends ControllerMVC
   @override
   disposePage() {}
 
-  void onPopInvoked(didPop) {
+  void onPopInvoked(bool didPop, data) {
     if (didPop) return;
     // ADD CODE >>>>>>
     PageManager().goHomePage();

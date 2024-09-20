@@ -1,7 +1,7 @@
 import '../enums/category_enum.dart';
 
 class ConceptModel {
-  int? id;
+  int? conceptId;
   late CategoryEnum category;
   late String name;
   DateTime? createdAt;
@@ -10,7 +10,6 @@ class ConceptModel {
     required this.category,
     required this.name,
     this.createdAt,
-    this.id,
   });
 
   ConceptModel.fromJson(Map<String, dynamic> json) {
@@ -20,11 +19,10 @@ class ConceptModel {
     );
     name = json["name"];
     createdAt = DateTime.tryParse(json["createdAt"]) ?? DateTime.now();
-    id = json["id"];
+    conceptId = json["conceptId"];
   }
 
   Map<String, dynamic> toJson() => {
-        "id": id,
         "categoryId": category.value,
         "name": name,
         "createdAt": createdAt,

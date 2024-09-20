@@ -6,9 +6,9 @@ import 'package:mvc_pattern/mvc_pattern.dart';
 
 // Project imports:
 import '../../../values/k_strings.dart';
+import '../../data_access/data_manager.dart';
 import '../../enums/category_enum.dart';
 import '../../interfaces/i_view_controller.dart';
-import '../../managers/data_manager.dart';
 import '../../managers/page_manager.dart';
 import '../../models/board_data_model.dart';
 import '../../utils/functions_utils.dart';
@@ -73,7 +73,7 @@ class HomePageController extends ControllerMVC implements IViewController {
     try {
       boardDataModel = await DataManager().getBoardData();
     } catch (err) {
-      showToast(message: KStrings.errorFailedToGetBoardData);
+      showToast(message: KStrings.homeErrorFailedToGetBoardData);
     }
 
     isLoading = false;

@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import '../../../values/k_colors.dart';
@@ -48,7 +46,7 @@ class HistoryPageState extends StateMVC<HistoryPage> {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      onPopInvoked: _con.onPopInvoked,
+      onPopInvokedWithResult: _con.onPopInvoked,
       canPop: false,
       child: SafeArea(
         child: Scaffold(
@@ -84,7 +82,7 @@ class HistoryPageState extends StateMVC<HistoryPage> {
                     ),
                     Expanded(
                       child: _categoryButton(
-                        category: CategoryEnum.achievemnts,
+                        category: CategoryEnum.achievements,
                       ),
                     ),
                   ],
@@ -237,7 +235,7 @@ class HistoryPageState extends StateMVC<HistoryPage> {
   Widget _placeholder() {
     return Center(
       child: Text(
-        KStrings.errorFailedToGetExpensesHistory,
+        KStrings.historyErrorFailedToGetExpensesHistory,
         style: KStyles.errorViewPlaceholderTextStyle,
         textAlign: TextAlign.center,
       ),
@@ -248,7 +246,7 @@ class HistoryPageState extends StateMVC<HistoryPage> {
     if (_con.expenseList.isEmpty) {
       return Center(
         child: Text(
-          KStrings.errorFailedEmptyExpensesHistory,
+          KStrings.historyErrorFailedEmptyExpensesHistory,
           style: KStyles.errorViewPlaceholderTextStyle,
           textAlign: TextAlign.center,
         ),
@@ -322,22 +320,22 @@ class HistoryPageState extends StateMVC<HistoryPage> {
         ),
       );
       result.add(
-        TableRow(
+        const TableRow(
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 2.0),
+              padding: EdgeInsets.symmetric(vertical: 2.0),
               child: Divider(),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 2.0),
+              padding: EdgeInsets.symmetric(vertical: 2.0),
               child: Divider(),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 2.0),
+              padding: EdgeInsets.symmetric(vertical: 2.0),
               child: Divider(),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 2.0),
+              padding: EdgeInsets.symmetric(vertical: 2.0),
               child: Divider(),
             ),
           ],

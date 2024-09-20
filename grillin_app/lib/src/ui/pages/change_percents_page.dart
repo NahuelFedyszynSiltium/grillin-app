@@ -45,7 +45,7 @@ class ChangePercentsPageState extends StateMVC<ChangePercentsPage> {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      onPopInvoked: _con.onPopInvoked,
+      onPopInvokedWithResult: _con.onPopInvoked,
       canPop: false,
       child: SafeArea(
         child: Scaffold(
@@ -78,7 +78,7 @@ class ChangePercentsPageState extends StateMVC<ChangePercentsPage> {
   Widget _placeholder() {
     return Center(
       child: Text(
-        KStrings.errorFailedToGetPercents,
+        KStrings.changePercentsErrorFailedToGetPercents,
         textAlign: TextAlign.center,
         style: KStyles.errorViewPlaceholderTextStyle,
       ),
@@ -102,7 +102,7 @@ class ChangePercentsPageState extends StateMVC<ChangePercentsPage> {
             ),
             const SizedBox(width: 5),
             _categoryButton(
-              category: CategoryEnum.achievemnts,
+              category: CategoryEnum.achievements,
             ),
           ],
         ),
@@ -233,7 +233,7 @@ class ChangePercentsPageState extends StateMVC<ChangePercentsPage> {
               children: [
                 Expanded(
                   child: Text(
-                    "${KStrings.selectedTotalPercent}: ",
+                    "${KStrings.changePercentsSelectedTotalPercent}: ",
                     style: TextStyle(
                       color: _con.isValidPercent ? KColors.white : Colors.red,
                       fontSize: KValues.fontSizeMedium,

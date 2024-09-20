@@ -105,7 +105,7 @@ class ${"${className}PageState"} extends StateMVC<${"${className}Page"}> {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      onPopInvoked: _con.onPopInvoked,
+      onPopInvokedWithResult: _con.onPopInvoked,
       canPop: false,
       child: SafeArea(
         child: Scaffold(
@@ -120,7 +120,7 @@ class ${"${className}PageState"} extends StateMVC<${"${className}Page"}> {
 }
 
 String _writeController({required String fileName, required String className}) {
-  return """ 
+  return """
 import 'package:mvc_pattern/mvc_pattern.dart';
 import '../../interfaces/i_view_controller.dart';
 import '../../utils/page_args.dart';
@@ -144,7 +144,7 @@ class ${"${className}PageController"} extends ControllerMVC implements IViewCont
   @override
   disposePage() {}
 
-  void onPopInvoked(didPop) {
+  void onPopInvoked(bool didPop, data) {
     if (didPop) return;
     // ADD CODE >>>>>>
 

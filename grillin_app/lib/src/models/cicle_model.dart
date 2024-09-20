@@ -1,7 +1,7 @@
 import 'expense_model.dart';
 
 class CicleModel {
-  late int id;
+  late int? cicleId;
   late List<ExpenseModel> expenses;
   late DateTime createdAt;
   DateTime? endedAt;
@@ -11,7 +11,6 @@ class CicleModel {
     required this.createdAt,
     required this.expenses,
     required this.fixedIncome,
-    required this.id,
     this.endedAt,
   });
 
@@ -22,7 +21,7 @@ class CicleModel {
             json["expenses"].map((e) => ExpenseModel.fromJson(e)))
         : [];
     fixedIncome = json["fixedIncome"];
-    id = json["id"];
+    cicleId = json["id"];
     endedAt = DateTime.tryParse(json["endedAt"]);
   }
 
@@ -36,7 +35,6 @@ class CicleModel {
                 .toList()
             : [],
         "fixedIncome": fixedIncome,
-        "id": id,
         "endedAt": endedAt,
       };
 }

@@ -43,7 +43,7 @@ class SetIncomePageState extends StateMVC<SetIncomePage> {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      onPopInvoked: _con.onPopInvoked,
+      onPopInvokedWithResult: _con.onPopInvoked,
       canPop: false,
       child: SafeArea(
         child: Scaffold(
@@ -82,10 +82,10 @@ class SetIncomePageState extends StateMVC<SetIncomePage> {
                             SizedBox(
                               height: MediaQuery.of(context).size.height * .05,
                             ),
-                            Text(
+                            const Text(
                               KStrings.setFixedIncomePageHint,
                               textAlign: TextAlign.center,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: KColors.white,
                                 fontSize: KValues.fontSizeMedium,
                               ),
@@ -93,10 +93,10 @@ class SetIncomePageState extends StateMVC<SetIncomePage> {
                             SizedBox(
                               height: MediaQuery.of(context).size.height * .05,
                             ),
-                            Text(
+                            const Text(
                               KStrings.setFixedIncome,
                               textAlign: TextAlign.center,
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: KColors.white,
                                 fontSize: KValues.fontSizeLarge,
                               ),

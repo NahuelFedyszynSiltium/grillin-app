@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import '../../../values/k_strings.dart';
+import '../../data_access/data_manager.dart';
 import '../../interfaces/i_view_controller.dart';
-import '../../managers/data_manager.dart';
 import '../../managers/page_manager.dart';
 import '../../utils/functions_utils.dart';
 import '../../utils/page_args.dart';
@@ -31,7 +31,7 @@ class SetIncomePageController extends ControllerMVC implements IViewController {
   @override
   disposePage() {}
 
-  void onPopInvoked(didPop) {
+  void onPopInvoked(bool didPop, data) {
     if (didPop) return;
     PageManager().goHomePage();
   }
@@ -40,7 +40,7 @@ class SetIncomePageController extends ControllerMVC implements IViewController {
     await LoadingPopup(
       context: PageManager().currentContext,
       onLoading: DataManager()
-          .postSetFixedIncome(income: double.parse(amountController.text)),
+          .startNewCicle(fixedIncome: double.parse(amountController.text)),
       onResult: (data) {
         _onAcceptSuccess();
       },
@@ -52,13 +52,13 @@ class SetIncomePageController extends ControllerMVC implements IViewController {
 
   void _onAcceptSuccess() {
     FocusManager.instance.primaryFocus?.unfocus();
-    showToast(message: KStrings.setFixedSetNewIncomeSuccess);
+    showToast(message: KStrings.setFixedIncomeSetNewIncomeSuccess);
     PageManager().goHomePage();
   }
 
   void _onAcceptFailure() {
     FocusManager.instance.primaryFocus?.unfocus();
-    showToast(message: KStrings.setFixedSetNewIncomeError);
+    showToast(message: KStrings.setFixedIncomeSetNewIncomeError);
     FocusManager.instance.primaryFocus?.unfocus();
   }
 }

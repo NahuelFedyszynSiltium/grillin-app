@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
+import '../../data_access/data_manager.dart';
 import '../../enums/category_enum.dart';
 import '../../interfaces/i_view_controller.dart';
-import '../../managers/data_manager.dart';
 import '../../managers/page_manager.dart';
+import '../../models/cicle_model.dart';
 import '../../models/expense_model.dart';
 import '../../utils/page_args.dart';
 
@@ -20,7 +21,7 @@ class HistoryPageController extends ControllerMVC implements IViewController {
 
   PageArgs? args;
   Map<CategoryEnum, bool> selectedCateogries = {
-    CategoryEnum.achievemnts: true,
+    CategoryEnum.achievements: true,
     CategoryEnum.dailys: true,
     CategoryEnum.saves: true,
     CategoryEnum.personals: true,
@@ -42,7 +43,7 @@ class HistoryPageController extends ControllerMVC implements IViewController {
   @override
   disposePage() {}
 
-  void onPopInvoked(didPop) {
+  void onPopInvoked(bool didPop, data) {
     if (didPop) return;
     PageManager().goHomePage();
   }
@@ -61,21 +62,26 @@ class HistoryPageController extends ControllerMVC implements IViewController {
 
   Future<void> getExpenseHistory() async {
     forceUpdate = false;
-    if (selectedCateogries.values.every(
-      (element) => !element,
-    )) {
-      expenseList = [];
-    } else {
-      List<CategoryEnum> aux = [];
-      for (CategoryEnum element in selectedCateogries.keys) {
-        if (selectedCateogries[element]!) {
-          aux.add(element);
+    CicleModel? currentCicle = await DataManager().getCurrentCicle();
+    if (currentCicle?.cicleId != null) {
+      if (selectedCateogries.values.every(
+        (element) => !element,
+      )) {
+        expenseList = [];
+      } else {
+        List<CategoryEnum> aux = [];
+        for (CategoryEnum element in selectedCateogries.keys) {
+          if (selectedCateogries[element]!) {
+            aux.add(element);
+          }
         }
+        expenseList = await DataManager().getExpensesPerCicle(
+          categories: aux,
+          cicleId: currentCicle!.cicleId!,
+        );
       }
-      expenseList = await DataManager().getExpensesHistory(
-        categories: aux,
-        page: pageCounter,
-      );
+    } else {
+      expenseList = [];
     }
   }
 }

@@ -6,18 +6,17 @@ import '../../values/k_strings.dart';
 enum CategoryEnum {
   dailys(0),
   personals(1),
-  achievemnts(2),
+  achievements(2),
   saves(3);
 
   final int value;
-
   const CategoryEnum(this.value);
 }
 
 extension CategoryEnumExtension on CategoryEnum {
   String categoryName() {
     switch (this) {
-      case CategoryEnum.achievemnts:
+      case CategoryEnum.achievements:
         return KStrings.categoryNameAchievemnts;
       case CategoryEnum.dailys:
         return KStrings.categoryNameDailys;
@@ -30,7 +29,7 @@ extension CategoryEnumExtension on CategoryEnum {
 
   String homeCardName() {
     switch (this) {
-      case CategoryEnum.achievemnts:
+      case CategoryEnum.achievements:
         return KStrings.homeCardNameAchievemnts;
       case CategoryEnum.dailys:
         return KStrings.homeCardNameDailys;
@@ -43,7 +42,7 @@ extension CategoryEnumExtension on CategoryEnum {
 
   Color categoryColor() {
     switch (this) {
-      case CategoryEnum.achievemnts:
+      case CategoryEnum.achievements:
         return KColors.purple;
       case CategoryEnum.dailys:
         return KColors.orange;
@@ -56,7 +55,7 @@ extension CategoryEnumExtension on CategoryEnum {
 
   Color categoryColorBright() {
     switch (this) {
-      case CategoryEnum.achievemnts:
+      case CategoryEnum.achievements:
         return KColors.purpleL1;
       case CategoryEnum.dailys:
         return KColors.orangeL1;

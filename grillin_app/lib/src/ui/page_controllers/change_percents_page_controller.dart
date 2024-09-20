@@ -1,14 +1,15 @@
 import 'dart:math';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import '../../../values/k_colors.dart';
 import '../../../values/k_strings.dart';
 import '../../../values/k_styles.dart';
+import '../../data_access/data_manager.dart';
 import '../../enums/category_enum.dart';
 import '../../interfaces/i_view_controller.dart';
-import '../../managers/data_manager.dart';
 import '../../managers/page_manager.dart';
-import '../../models/percents_category_response_model.dart';
+import '../../models/responses/category_response_model.dart';
 import '../../utils/functions_utils.dart';
 import '../../utils/page_args.dart';
 import '../popups/loading_popup.dart';
@@ -32,7 +33,7 @@ class ChangePercentsPageController extends ControllerMVC
   Map<CategoryEnum, int> percentsMap = {
     CategoryEnum.dailys: 0,
     CategoryEnum.personals: 0,
-    CategoryEnum.achievemnts: 0,
+    CategoryEnum.achievements: 0,
   };
 
   bool get isValidPercent =>
@@ -44,7 +45,7 @@ class ChangePercentsPageController extends ControllerMVC
   @override
   disposePage() {}
 
-  void onPopInvoked(didPop) {
+  void onPopInvoked(bool didPop, data) {
     if (didPop) return;
     // ADD CODE >>>>>>
     PageManager().goHomePage();
@@ -63,9 +64,9 @@ class ChangePercentsPageController extends ControllerMVC
           percentsMap[CategoryEnum.personals] = percent;
         });
         break;
-      case CategoryEnum.achievemnts:
+      case CategoryEnum.achievements:
         setState(() {
-          percentsMap[CategoryEnum.achievemnts] = percent;
+          percentsMap[CategoryEnum.achievements] = percent;
         });
         break;
       case CategoryEnum.saves:
@@ -136,7 +137,7 @@ class ChangePercentsPageController extends ControllerMVC
           colors: [
             CategoryEnum.dailys.categoryColor(),
             CategoryEnum.personals.categoryColor(),
-            CategoryEnum.achievemnts.categoryColor(),
+            CategoryEnum.achievements.categoryColor(),
           ],
           stops: const [.4, .5, .8],
         );
@@ -183,19 +184,30 @@ class ChangePercentsPageController extends ControllerMVC
   }
 
   void _onAcceptFailure() {
-    showToast(message: KStrings.errorFailedToUpdatePercents);
+    showToast(message: KStrings.changePercentsErrorFailedToUpdatePercents);
   }
 
   void _onAcceptSuccess() {
-    showToast(message: KStrings.successUpdatedPercents);
+    showToast(message: KStrings.changePercentsSuccessUpdatedPercents);
     PageManager().goHomePage();
   }
 
   Future<void> getPercentValues() async {
-    PercentsCategoryResponseModel response =
-        await DataManager().getPercentsPerCategory();
-    percentsMap[CategoryEnum.achievemnts] = response.achievemntsPercent;
-    percentsMap[CategoryEnum.personals] = response.personalsPercent;
-    percentsMap[CategoryEnum.dailys] = response.dailysPercent;
+    List<CategoryResponseModel> response = await DataManager().getCategories();
+    percentsMap[CategoryEnum.achievements] = response
+            .firstWhereOrNull(
+                (element) => element.categoryEnum == CategoryEnum.achievements)
+            ?.percentValue ??
+        0;
+    percentsMap[CategoryEnum.dailys] = response
+            .firstWhereOrNull(
+                (element) => element.categoryEnum == CategoryEnum.dailys)
+            ?.percentValue ??
+        0;
+    percentsMap[CategoryEnum.personals] = response
+            .firstWhereOrNull(
+                (element) => element.categoryEnum == CategoryEnum.personals)
+            ?.percentValue ??
+        0;
   }
 }

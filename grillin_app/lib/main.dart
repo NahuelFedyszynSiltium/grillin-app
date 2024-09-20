@@ -65,12 +65,6 @@ class MyHomePageState extends State<MyApp> {
       },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        fontFamily: 'Roboto',
-        scrollbarTheme: ScrollbarThemeData(
-          trackColor: WidgetStateProperty.all(Colors.grey),
-          thumbColor: WidgetStateProperty.all(Colors.grey),
-          trackBorderColor: WidgetStateProperty.all(Colors.grey),
-        ),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       title: 'Grillin',

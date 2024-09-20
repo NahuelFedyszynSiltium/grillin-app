@@ -5,6 +5,7 @@ import 'package:flutter_exit_app/flutter_exit_app.dart';
 // Project imports:
 import '../enums/page_names.dart';
 import '../ui/pages/change_percents_page.dart';
+import '../ui/pages/graphs_page.dart';
 import '../ui/pages/history_page.dart';
 import '../ui/pages/home_page.dart';
 import '../ui/pages/set_income_page.dart';
@@ -48,6 +49,8 @@ class PageManager {
       case PageNames.changePercents:
         return MaterialPageRoute(
             builder: (context) => ChangePercentsPage(arguments));
+      case PageNames.graphs:
+        return MaterialPageRoute(builder: (context) => GraphsPage(arguments));
       case PageNames.history:
         return MaterialPageRoute(builder: (context) => HistoryPage(arguments));
       case PageNames.home:
@@ -144,6 +147,11 @@ class PageManager {
 
   goChangePercentsPage({PageArgs? args, Function(PageArgs? args)? actionBack}) {
     _goPage(PageNames.changePercents.toString(),
+        args: args, actionBack: actionBack, makeRootPage: true);
+  }
+
+  goGraphsPage({PageArgs? args, Function(PageArgs? args)? actionBack}) {
+    _goPage(PageNames.graphs.toString(),
         args: args, actionBack: actionBack, makeRootPage: true);
   }
 

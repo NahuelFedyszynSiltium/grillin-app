@@ -9,7 +9,7 @@ class KColors {
   static const Color red = Color(0XFFD91315);
   static const Color redL1 = Color.fromARGB(255, 221, 92, 94);
 
-  static const Color black = Color(0XFF000000);
+  static const Color black = Color.fromARGB(255, 17, 17, 17);
   static const Color blackL1 = Color.fromARGB(255, 182, 182, 182);
 
   static const Color white = Color(0XFFFFFFFF);
