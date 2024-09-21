@@ -58,131 +58,135 @@ class AddExpensePopupState extends State<AddExpensePopup>
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Material(
-        color: Colors.transparent,
-        child: FadeTransition(
-          opacity: fadeAnimation,
-          child: Stack(
-            children: [
-              Container(
-                height: double.infinity,
-                width: double.infinity,
-                margin:
-                    const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-                decoration: BoxDecoration(
-                  color: widget.category.categoryColor(),
-                  borderRadius: BorderRadius.circular(25),
-                  boxShadow: [KStyles().overlayShadow],
-                ),
-              ),
-              Container(
-                height: double.infinity,
-                width: double.infinity,
-                margin:
-                    const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-                decoration: BoxDecoration(
-                  color: KColors.black.withOpacity(0.25),
-                  borderRadius: BorderRadius.circular(25),
-                ),
-              ),
-              Container(
-                height: double.infinity,
-                width: double.infinity,
-                margin:
-                    const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      KColors.white.withOpacity(0.1),
-                      Colors.transparent,
-                      KColors.white.withOpacity(0.1),
-                    ],
-                    transform: const GradientRotation(pi * 0.25),
+    return Padding(
+      padding:
+          EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.025),
+      child: Center(
+        child: Material(
+          color: Colors.transparent,
+          child: FadeTransition(
+            opacity: fadeAnimation,
+            child: Stack(
+              children: [
+                Container(
+                  height: double.infinity,
+                  width: double.infinity,
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                  decoration: BoxDecoration(
+                    color: widget.category.categoryColor(),
+                    borderRadius: BorderRadius.circular(25),
+                    boxShadow: [KStyles().overlayShadow],
                   ),
-                  borderRadius: BorderRadius.circular(25),
                 ),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: MediaQuery.of(context).size.width * .1,
+                Container(
+                  height: double.infinity,
+                  width: double.infinity,
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                  decoration: BoxDecoration(
+                    color: KColors.black.withOpacity(0.25),
+                    borderRadius: BorderRadius.circular(25),
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * .025,
-                      ),
-                      Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                          widget.category.categoryName(),
-                          textAlign: TextAlign.center,
-                          style: KStyles.homeCardBodyTextStyle,
+                ),
+                Container(
+                  height: double.infinity,
+                  width: double.infinity,
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        KColors.white.withOpacity(0.1),
+                        Colors.transparent,
+                        KColors.white.withOpacity(0.1),
+                      ],
+                      transform: const GradientRotation(pi * 0.25),
+                    ),
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: MediaQuery.of(context).size.width * .1,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * .025,
                         ),
-                      ),
-                      Visibility(
-                        visible: widget.category == CategoryEnum.saves,
-                        child: Padding(
-                          padding: EdgeInsets.only(
-                            top: MediaQuery.of(context).size.height * .01,
-                          ),
-                          child: const Text(
-                            "${KStrings.expensesSavesExpenseHint}:",
+                        Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            widget.category.categoryName(),
                             textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: KValues.fontSizeSmall,
-                              color: KColors.white,
-                              fontWeight: FontWeight.w400,
+                            style: KStyles.homeCardBodyTextStyle,
+                          ),
+                        ),
+                        Visibility(
+                          visible: widget.category == CategoryEnum.saves,
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                              top: MediaQuery.of(context).size.height * .01,
+                            ),
+                            child: const Text(
+                              "${KStrings.expensesSavesExpenseHint}:",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: KValues.fontSizeSmall,
+                                color: KColors.white,
+                                fontWeight: FontWeight.w400,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * .025,
-                      ),
-                      const Text(
-                        "${KStrings.importValue}:",
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          fontSize: KValues.fontSizeLarge,
-                          color: KColors.white,
-                          fontWeight: FontWeight.w500,
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * .025,
                         ),
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * .01,
-                      ),
-                      _amountInput(),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * .025,
-                      ),
-                      const Text(
-                        "${KStrings.concept}:",
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          fontSize: KValues.fontSizeLarge,
-                          color: KColors.white,
-                          fontWeight: FontWeight.w500,
+                        const Text(
+                          "${KStrings.importValue}:",
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            fontSize: KValues.fontSizeLarge,
+                            color: KColors.white,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * .01,
-                      ),
-                      Expanded(
-                        child: _conceptBody(),
-                      ),
-                      _button(),
-                      SizedBox(
-                        height: MediaQuery.of(context).viewInsets.bottom,
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * .025,
-                      ),
-                    ],
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * .01,
+                        ),
+                        _amountInput(),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * .025,
+                        ),
+                        const Text(
+                          "${KStrings.concept}:",
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            fontSize: KValues.fontSizeLarge,
+                            color: KColors.white,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * .01,
+                        ),
+                        Expanded(
+                          child: _conceptBody(),
+                        ),
+                        _button(),
+                        SizedBox(
+                          height: MediaQuery.of(context).viewInsets.bottom,
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * .025,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -378,7 +382,7 @@ class AddExpensePopupState extends State<AddExpensePopup>
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Padding(
-            padding: const EdgeInsets.all(5),
+            padding: const EdgeInsets.all(15),
             child: Wrap(
               spacing: 10,
               runSpacing: 10,
@@ -403,7 +407,7 @@ class AddExpensePopupState extends State<AddExpensePopup>
     List<Widget> result = [];
     if (_conceptList.isNotEmpty) {
       for (ConceptModel element in _conceptList) {
-        if (element.conceptId != null && element.name.isNotEmpty) {
+        if (element.conceptId != null && element.conceptName.isNotEmpty) {
           result.add(_chip(concept: element));
         }
       }
@@ -431,7 +435,7 @@ class AddExpensePopupState extends State<AddExpensePopup>
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
           child: Text(
-            concept.name,
+            concept.conceptName,
             style: const TextStyle(
               color: KColors.white,
               fontSize: KValues.fontSizeMedium,
@@ -461,11 +465,11 @@ class AddExpensePopupState extends State<AddExpensePopup>
     ).show();
   }
 
-  Future<void> _onAcceptLoading() async {
+  Future<int> _onAcceptLoading() async {
     late ExpenseModel newExpense;
     if (_addNewConceptSwitchValue) {
       ConceptModel newConcept = ConceptModel(
-        name: _conceptController.text,
+        conceptName: _conceptController.text,
         category: widget.category,
       );
       newExpense = ExpenseModel(
@@ -517,6 +521,7 @@ class AddExpensePopupState extends State<AddExpensePopup>
         .getConceptsByCategory(categoryEnum: widget.category);
 
     _conceptList.removeWhere((element) =>
-        element.conceptId == null || element.name.toString().trim().isEmpty);
+        element.conceptId == null ||
+        element.conceptName.toString().trim().isEmpty);
   }
 }

@@ -40,7 +40,7 @@ class SetIncomePageController extends ControllerMVC implements IViewController {
     await LoadingPopup(
       context: PageManager().currentContext,
       onLoading: DataManager()
-          .startNewCicle(fixedIncome: double.parse(amountController.text)),
+          .startNewCicle(fixedIncome: num.parse(amountController.text)),
       onResult: (data) {
         _onAcceptSuccess();
       },

@@ -179,7 +179,7 @@ class ChangePercentsPageController extends ControllerMVC
   }
 
   Future<void> _onAcceptLoading() async {
-    await Future.delayed(const Duration(seconds: 2));
+    await DataManager().updatePercents(percentsMap: percentsMap);
     return;
   }
 

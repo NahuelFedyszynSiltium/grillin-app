@@ -11,6 +11,12 @@ class KStyles {
     fontWeight: FontWeight.w400,
   );
 
+  static const TextStyle homeCardBodyNegativeValueTextStyle = TextStyle(
+    fontSize: KValues.fontSizeLargeXXL,
+    color: KColors.red,
+    fontWeight: FontWeight.w700,
+  );
+
   static const TextStyle homeCardTitleTextStyle = TextStyle(
     fontSize: KValues.fontSizeMedium,
     color: KColors.white,

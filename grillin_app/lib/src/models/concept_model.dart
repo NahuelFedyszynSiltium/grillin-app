@@ -3,12 +3,12 @@ import '../enums/category_enum.dart';
 class ConceptModel {
   int? conceptId;
   late CategoryEnum category;
-  late String name;
+  late String conceptName;
   DateTime? createdAt;
 
   ConceptModel({
     required this.category,
-    required this.name,
+    required this.conceptName,
     this.createdAt,
   });
 
@@ -17,7 +17,7 @@ class ConceptModel {
       (element) => json["categoryId"] == element.value,
       orElse: () => CategoryEnum.personals,
     );
-    name = json["name"];
+    conceptName = json["conceptName"];
     createdAt =
         DateTime.tryParse(json["createdAt"].toString()) ?? DateTime.now();
     conceptId = json["conceptId"];
@@ -25,7 +25,7 @@ class ConceptModel {
 
   Map<String, dynamic> toJson() => {
         "categoryId": category.value,
-        "name": name,
+        "conceptName": conceptName,
         "createdAt": createdAt.toString(),
       };
 }

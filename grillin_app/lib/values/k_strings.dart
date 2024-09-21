@@ -4,12 +4,21 @@ class KStrings {
   static const String all = "Todos";
   static const String board = "Tablero";
   static const String concept = "Concepto";
+  static const String importValue = "Importe";
   static const String minus = "Menos";
   static const String more = "Más";
-  static const String importValue = "Importe";
   static const String tapAgainToExit = "Presiona de nuevo para salir";
   static const String youSpend = "Gastaste un";
+  // ------------------------------------------------------------------
 
+  // DRAWER
+  static const String drawerBoard = "Tablero";
+  static const String drawerConcepts = "Conceptos";
+  static const String drawerGraphs = "Gráficos";
+  static const String drawerHistory = "Historial";
+  static const String drawerPercents = "Porcentajes";
+  static const String drawerSaves = "Ahorros";
+  static const String drawerStartEndCicle = "Iniciar/Cerrar ciclo";
   // ------------------------------------------------------------------
 
   //ADD EXPENSE POPUP/PAGE
@@ -27,14 +36,14 @@ class KStrings {
 
   //CHANGE PERCENTS PAGE
   static const String changePercents = "Cambiar porcentajes";
-  static String changePercentsErrorFailedToGetPercents =
+  static const String changePercentsErrorFailedToGetPercents =
       "Ocurrió un error al obtener los valores de porcentajes";
-  static String changePercentsErrorFailedToUpdatePercents =
+  static const String changePercentsErrorFailedToUpdatePercents =
       "Ocurrió un error al intentar actualizar tus porcentajes";
   static const String changePercentsSelectedTotalPercent =
       "Porcentaje total seleccionado";
 
-  static String changePercentsSuccessUpdatedPercents =
+  static const String changePercentsSuccessUpdatedPercents =
       "Porcentajes actualizados correctamente";
 
   //GRAPHS PAGE
@@ -65,9 +74,9 @@ class KStrings {
 
   //HISTORY PAGE
   static const String history = "Historial";
-  static String historyErrorFailedToGetExpensesHistory =
+  static const String historyErrorFailedToGetExpensesHistory =
       "Ocurrió un error al intentar obtener el historial de transacciónes";
-  static String historyErrorFailedEmptyExpensesHistory =
+  static const String historyErrorFailedEmptyExpensesHistory =
       "No existen transacciónes para mostrar";
   static const String historyTableHeaderCicle = "Ciclo";
   static const String historyTableHeaderConcept = "Concepto";
@@ -79,15 +88,16 @@ class KStrings {
   static const String homeCardNamePersonals = "Para gastos personales";
   static const String homeCardNameDailys = "Para gastos fijos";
   static const String homeCardNameAchievemnts = "Para metas";
-  static String homeErrorFailedToGetBoardData =
+  static const String homeErrorFailedToGetBoardData =
       "Ocurrió un error al obtener los balances actuales";
 
   //SET INCOME PAGE
   static const String setFixedIncome = "Setear ingreso fijo";
-  static const String setFixedIncomeButtonString =
-      "Setear const ingreso fijo y empezar nuevo ciclo";
+  static const String setFixedIncomeButtonString = "Empezar nuevo ciclo";
   static const String setFixedIncomePageHint =
-      "Setea const un ingreso fijo e inicia un nuevo ciclo para guardar todas las transacciones hasta el momento, y volver a const calcular los porcentajes para un nuevo ciclo";
+      "Setea un ingreso para hacer los calculos de porcentajes para un nuevo ciclo.";
+  static const String setFixedIncomePageCloseCicleHint =
+      "Esto también finalizará el ciclo actual. Los sobrantes del ciclo se añadiran a tus ahorros.";
   static const String setFixedIncomes = "Setear ingresos fijos";
   static const String setFixedIncomeSetNewIncomeError =
       "Ocurrió const un error al intentar iniciar un nuevo ciclo";
@@ -98,6 +108,10 @@ class KStrings {
   static const String transferSavings = "Transferir ahorros";
   static const String transferSavingsTotalSaves = "Ahorros totales";
   static const String transferSavingsTransferTo = "Transferir a";
+  static const String transferSavingsErrorTransfer =
+      "Ocurrió un error al intentar transferir tus ahorros";
+  static const String transferSavingsSuccessTransfer =
+      "Monto transferido correctamente";
 
   // ------------------------------------------------------------------
 

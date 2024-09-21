@@ -6,6 +6,7 @@ class ExpenseModel {
   int? cicleId;
   late CategoryEnum category;
   late ConceptModel conceptModel;
+  late int conceptId;
   DateTime? createdAt;
   late num amount;
 
@@ -18,7 +19,7 @@ class ExpenseModel {
   });
 
   ExpenseModel.fromJson(Map<String, dynamic> json) {
-    conceptModel = ConceptModel.fromJson(json["conceptModel"]);
+    conceptId = json["conceptId"];
     amount = json["amount"];
     category = CategoryEnum.values.firstWhere(
       (element) => json["categoryId"] == element.value,
@@ -31,7 +32,7 @@ class ExpenseModel {
   }
 
   Map<String, dynamic> toJson() => {
-        "conceptModel": conceptModel,
+        "conceptId": conceptId,
         "amount": amount,
         "categoryId": category.value,
         "cicleId": cicleId,

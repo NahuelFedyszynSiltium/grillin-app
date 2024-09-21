@@ -52,22 +52,18 @@ class ChangePercentsPageState extends StateMVC<ChangePercentsPage> {
           backgroundColor: KColors.primary,
           appBar: SimpleComponents.menuAppBar(context: context),
           drawer: SimpleComponents().getDrawer(context: context),
-          body: Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: MediaQuery.of(context).size.width * 0.02),
-            child: Futuristic(
-              futureBuilder: _con.getPercentValues,
-              autoStart: true,
-              busyBuilder: (context) {
-                return const Center(
-                  child: CircularProgressIndicator(
-                    color: KColors.primaryL1,
-                  ),
-                );
-              },
-              dataBuilder: (p0, p1) => _dataBuilder(),
-              errorBuilder: (p0, p1, p2) => _placeholder(),
-            ),
+          body: Futuristic(
+            futureBuilder: _con.getPercentValues,
+            autoStart: true,
+            busyBuilder: (context) {
+              return const Center(
+                child: CircularProgressIndicator(
+                  color: KColors.primaryL1,
+                ),
+              );
+            },
+            dataBuilder: (p0, p1) => _dataBuilder(),
+            errorBuilder: (p0, p1, p2) => _placeholder(),
           ),
         ),
       ),
@@ -89,21 +85,25 @@ class ChangePercentsPageState extends StateMVC<ChangePercentsPage> {
       mainAxisSize: MainAxisSize.max,
       children: [
         SizedBox(height: MediaQuery.of(context).size.width * 0.05),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            _categoryButton(
-              category: CategoryEnum.dailys,
-            ),
-            const SizedBox(width: 5),
-            _categoryButton(
-              category: CategoryEnum.personals,
-            ),
-            const SizedBox(width: 5),
-            _categoryButton(
-              category: CategoryEnum.achievements,
-            ),
-          ],
+        Padding(
+          padding: EdgeInsets.symmetric(
+              horizontal: MediaQuery.of(context).size.width * 0.02),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              _categoryButton(
+                category: CategoryEnum.dailys,
+              ),
+              const SizedBox(width: 5),
+              _categoryButton(
+                category: CategoryEnum.personals,
+              ),
+              const SizedBox(width: 5),
+              _categoryButton(
+                category: CategoryEnum.achievements,
+              ),
+            ],
+          ),
         ),
         SizedBox(height: MediaQuery.of(context).size.width * 0.05),
         Expanded(
@@ -113,6 +113,9 @@ class ChangePercentsPageState extends StateMVC<ChangePercentsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * .04,
+                  ),
                   _percentButton(percent: 0),
                   SizedBox(
                     width: MediaQuery.of(context).size.width * .04,
@@ -126,6 +129,9 @@ class ChangePercentsPageState extends StateMVC<ChangePercentsPage> {
                     width: MediaQuery.of(context).size.width * .04,
                   ),
                   _percentButton(percent: 15),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * .04,
+                  ),
                 ],
               ),
               SizedBox(
@@ -134,6 +140,9 @@ class ChangePercentsPageState extends StateMVC<ChangePercentsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * .04,
+                  ),
                   _percentButton(percent: 20),
                   SizedBox(
                     width: MediaQuery.of(context).size.width * .04,
@@ -147,6 +156,9 @@ class ChangePercentsPageState extends StateMVC<ChangePercentsPage> {
                     width: MediaQuery.of(context).size.width * .04,
                   ),
                   _percentButton(percent: 35),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * .04,
+                  ),
                 ],
               ),
               SizedBox(
@@ -155,6 +167,9 @@ class ChangePercentsPageState extends StateMVC<ChangePercentsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * .04,
+                  ),
                   _percentButton(percent: 40),
                   SizedBox(
                     width: MediaQuery.of(context).size.width * .04,
@@ -168,6 +183,9 @@ class ChangePercentsPageState extends StateMVC<ChangePercentsPage> {
                     width: MediaQuery.of(context).size.width * .04,
                   ),
                   _percentButton(percent: 55),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * .04,
+                  ),
                 ],
               ),
               SizedBox(
@@ -176,6 +194,9 @@ class ChangePercentsPageState extends StateMVC<ChangePercentsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * .04,
+                  ),
                   _percentButton(percent: 60),
                   SizedBox(
                     width: MediaQuery.of(context).size.width * .04,
@@ -189,6 +210,9 @@ class ChangePercentsPageState extends StateMVC<ChangePercentsPage> {
                     width: MediaQuery.of(context).size.width * .04,
                   ),
                   _percentButton(percent: 75),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * .04,
+                  ),
                 ],
               ),
               SizedBox(
@@ -197,6 +221,9 @@ class ChangePercentsPageState extends StateMVC<ChangePercentsPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * .04,
+                  ),
                   _percentButton(percent: 80),
                   SizedBox(
                     width: MediaQuery.of(context).size.width * .04,
@@ -210,12 +237,19 @@ class ChangePercentsPageState extends StateMVC<ChangePercentsPage> {
                     width: MediaQuery.of(context).size.width * .04,
                   ),
                   _percentButton(percent: 95),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * .04,
+                  ),
                 ],
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.width * .04,
               ),
-              _percentButton(percent: 100, isFinite: false),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: MediaQuery.of(context).size.width * 0.04),
+                child: _percentButton(percent: 100, isFinite: false),
+              ),
             ],
           ),
         ),
@@ -257,10 +291,14 @@ class ChangePercentsPageState extends StateMVC<ChangePercentsPage> {
         SizedBox(
           height: MediaQuery.of(context).size.width * .04,
         ),
-        ButtonComponent(
-          onAccept: _con.onAccept,
-          isEnabled: _con.isValidPercent,
-          color: KColors.primaryL1,
+        Padding(
+          padding: EdgeInsets.symmetric(
+              horizontal: MediaQuery.of(context).size.width * 0.02),
+          child: ButtonComponent(
+            onAccept: _con.onAccept,
+            isEnabled: _con.isValidPercent,
+            color: KColors.primaryL1,
+          ),
         ),
         SizedBox(
           height: MediaQuery.of(context).size.width * .04,
@@ -269,7 +307,7 @@ class ChangePercentsPageState extends StateMVC<ChangePercentsPage> {
     );
   }
 
-  _percentButton({required int percent, bool isFinite = true}) {
+  Widget _percentButton({required int percent, bool isFinite = true}) {
     return InkWell(
       onTap: () {
         _con.onPercentButtonTap(percent);

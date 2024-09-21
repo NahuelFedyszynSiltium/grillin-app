@@ -54,6 +54,12 @@ class HomePageController extends ControllerMVC implements IViewController {
   }
 
   Future<void> onCategoryTap({required CategoryEnum category}) async {
+    if (boardDataModel == null) {
+      showToast(
+          message: KStrings.errorsSetFixedAmountFirst,
+          duration: const Duration(seconds: 3));
+      return;
+    }
     bool? result = await showDialog(
       context: PageManager().currentContext,
       barrierColor: Colors.transparent,

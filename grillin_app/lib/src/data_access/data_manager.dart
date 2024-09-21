@@ -8,8 +8,10 @@ import '../models/board_data_model.dart';
 import '../models/cicle_model.dart';
 import '../models/concept_model.dart';
 import '../models/expense_model.dart';
+import '../models/requests/transfer_savings_request_model.dart';
 import '../models/responses/category_response_model.dart';
 import '../models/responses/total_expenses_by_category_response_model.dart';
+import '../providers/app_provider.dart';
 import 'sqlite_helper.dart';
 
 enum _TableNames {
@@ -24,8 +26,12 @@ enum _TableNames {
 }
 
 enum OrderCriteria {
-  ASC,
-  DESC,
+  ASC("ASC"),
+  DESC("DESC");
+
+  final String value;
+
+  const OrderCriteria(this.value);
 }
 
 class FilterModel {
@@ -33,9 +39,15 @@ class FilterModel {
   String? columnName;
   String? filter;
 
+  FilterModel({
+    this.columnName,
+    this.filter,
+    this.orderCriteria = OrderCriteria.DESC,
+  });
+
   String? getOrderBy() {
     if (columnName != null) {
-      return "$columnName $orderCriteria";
+      return "$columnName ${orderCriteria.value}";
     } else {
       return null;
     }
@@ -65,14 +77,25 @@ class DataManager {
     await SqliteHelper().init();
   }
 
-  Future closeCicle({required int cicleId}) async {
-    await _database.update(
-      _TableNames.cicles.tableName,
-      {
-        "endedAt": DateTime.now().toString(),
-      },
-      where: "cicleId = $cicleId",
-    );
+  ///Devuelve la suma de todo lo que sobro. Útil para sumar al campo de saves al iniciar el proximo ciclo
+  Future<num> closeCurrentCicle() async {
+    CicleModel? currentCicle = await getCurrentCicle();
+    if (currentCicle?.cicleId == null) {
+      throw Exception("No se puede cerrar un ciclo que no inicio");
+    } else {
+      BoardDataModel? currentBoardData = await getBoardData();
+      num totalSavings = 0;
+      totalSavings += (currentBoardData?.achievementRemainingAmount ?? 0);
+      totalSavings += (currentBoardData?.personalRemainingAmount ?? 0);
+      totalSavings += (currentBoardData?.dailyRemainingAmount ?? 0);
+      totalSavings += (currentBoardData?.savesAmount ?? 0);
+
+      _database.update(
+          _TableNames.cicles.tableName, {"endedAt": DateTime.now.toString()},
+          where: "cicleId = ${currentCicle!.cicleId}");
+
+      return totalSavings;
+    }
   }
 
   Future<BoardDataModel?> getBoardData() async {
@@ -151,7 +174,7 @@ class DataManager {
                   ?.addFromSavings ??
               0);
 
-      return BoardDataModel(
+      BoardDataModel result = BoardDataModel(
         achievementRemainingAmount: remainingAchievements,
         dailyRemainingAmount: remainingDailys,
         personalRemainingAmount: remainingPersonals,
@@ -172,17 +195,20 @@ class DataManager {
             0),
         savesAmount: saves,
       );
+      AppProvider().boardDataModel = result;
+      return result;
     } else {
       return null;
     }
   }
 
   Future<List<CategoryResponseModel>> getCategories() async {
-    List<Map<String, dynamic>> result =
-        await _database.query(_TableNames.categories.tableName);
+    List<Map<String, dynamic>> result = await _database
+        .rawQuery("SELECT * FROM ${_TableNames.categories.tableName}");
     if (result.isNotEmpty) {
-      return List<CategoryResponseModel>.from(
+      List<CategoryResponseModel> aux = List<CategoryResponseModel>.from(
           result.map((e) => CategoryResponseModel.fromJson(e)));
+      return aux;
     } else {
       return [];
     }
@@ -195,8 +221,10 @@ class DataManager {
       limit: 1,
     );
     if (result.isNotEmpty) {
-      return List<CicleModel>.from(result.map((e) => CicleModel.fromJson(e)))
-          .first;
+      CicleModel aux =
+          List<CicleModel>.from(result.map((e) => CicleModel.fromJson(e)))
+              .first;
+      return aux;
     } else {
       return null;
     }
@@ -213,11 +241,22 @@ class DataManager {
     }
   }
 
+  Future<ConceptModel> getConcept({required int conceptId}) async {
+    List<Map<String, dynamic>> result = await _database
+        .query(_TableNames.concepts.tableName, where: "conceptId = $conceptId");
+    ConceptModel aux =
+        List<ConceptModel>.from(result.map((e) => ConceptModel.fromJson(e)))
+            .first;
+    return aux;
+  }
+
   Future<List<ConceptModel>> getConceptsByCategory(
       {required CategoryEnum categoryEnum}) async {
     List<Map<String, dynamic>> result = await _database.query(
         _TableNames.concepts.tableName,
-        where: "categoryId = ${categoryEnum.value}");
+        where:
+            "categoryId = ${categoryEnum.value} AND conceptId != 0 AND conceptId != 1");
+    //EL DISTINTO DE CERO ES PARA EVITAR MOSTRAR EL CONCEPTO DE TRANSFERENCIA PARA LA CATEGORIA DE SAVES
     if (result.isNotEmpty) {
       return List<ConceptModel>.from(
           result.map((element) => ConceptModel.fromJson(element)));
@@ -252,8 +291,8 @@ class DataManager {
         for (CategoryEnum category in categories!) {
           aux += "OR categoryId=${category.value} ";
         }
-        aux.substring(2);
-        result += " AND $aux";
+        aux = aux.substring(2);
+        result += " AND ($aux)";
       }
       if (filterModel?.getLike() != null) {
         result += filterModel!.getLike()!;
@@ -267,8 +306,12 @@ class DataManager {
       orderBy: filterModel?.getOrderBy(),
     );
     if (result.isNotEmpty) {
-      return List<ExpenseModel>.from(
+      List<ExpenseModel> expenses = List<ExpenseModel>.from(
           result.map((element) => ExpenseModel.fromJson(element)));
+      for (ExpenseModel expense in expenses) {
+        expense.conceptModel = await getConcept(conceptId: expense.conceptId);
+      }
+      return expenses;
     } else {
       return [];
     }
@@ -287,41 +330,104 @@ class DataManager {
     }
   }
 
-  Future<void> insertConcept({required ConceptModel conceptModel}) async {
+  Future<int> insertConcept({required ConceptModel conceptModel}) async {
     conceptModel.createdAt = DateTime.now();
-    await _database.insert(
+    return await _database.insert(
         _TableNames.concepts.tableName, conceptModel.toJson());
   }
 
-  Future<void> insertExpense({required ExpenseModel expenseModel}) async {
+  Future<int> insertExpense({required ExpenseModel expenseModel}) async {
     if (expenseModel.conceptModel.conceptId == null) {
-      await insertConcept(conceptModel: expenseModel.conceptModel);
+      int conceptId =
+          await insertConcept(conceptModel: expenseModel.conceptModel);
+      expenseModel.conceptId = conceptId;
+    } else {
+      expenseModel.conceptId = expenseModel.conceptModel.conceptId!;
     }
     expenseModel.createdAt = DateTime.now();
-    await _database.insert(
+    expenseModel.cicleId = (await getCurrentCicle())!.cicleId!;
+    return await _database.insert(
       _TableNames.expenses.tableName,
       expenseModel.toJson(),
     );
   }
 
   Future<CicleModel> startNewCicle({required num fixedIncome}) async {
-    try {
-      CicleModel? currentCicle = await getCurrentCicle();
-      if (currentCicle?.cicleId != null) {
-        await closeCicle(cicleId: currentCicle!.cicleId!);
-      }
-      int result = await _database.insert(
-          _TableNames.cicles.tableName,
-          CicleModel(
-            createdAt: DateTime.now(),
-            expenses: [],
-            fixedIncome: fixedIncome,
-          ).toJson());
-      return (await getCicle(cicleId: result))!;
-    } catch (err) {
-      rethrow;
+    CicleModel? currentCicle = await getCurrentCicle();
+    num? totalSavings;
+    if (currentCicle?.cicleId != null) {
+      totalSavings = await closeCurrentCicle();
     }
+    int result = await _database.insert(
+      _TableNames.cicles.tableName,
+      CicleModel(
+        createdAt: DateTime.now(),
+        fixedIncome: fixedIncome,
+      ).toJson(),
+    );
+    await _database.update(
+      _TableNames.categories.tableName,
+      {
+        "addFromSavings": 0,
+      },
+    );
+    if (totalSavings != null) {
+      await _database.insert(
+        _TableNames.expenses.tableName,
+        {
+          "conceptId": 1,
+          "amount": totalSavings,
+          "categoryId": CategoryEnum.saves.value,
+          "cicleId": result,
+          "createdAt": DateTime.now().toString(),
+        },
+      );
+    }
+    return (await getCicle(cicleId: result))!;
   }
 
-  Future<void> transferSavings() async {}
+  Future<void> transferSavings(
+      {required TransferSavingsRequestModel
+          transferSavingsRequestModel}) async {
+    CicleModel currentCicle = (await getCurrentCicle())!;
+    await _database.update(
+        _TableNames.categories.tableName,
+        {
+          "addFromSavings": transferSavingsRequestModel.amount,
+        },
+        where: "categoryId = ${transferSavingsRequestModel.category.value}");
+    await _database.insert(
+      _TableNames.expenses.tableName,
+      {
+        "conceptId": 0,
+        "amount": -transferSavingsRequestModel.amount,
+        "categoryId": transferSavingsRequestModel.category.value,
+        "cicleId": currentCicle.cicleId!,
+        "createdAt": DateTime.now().toString(),
+      },
+    );
+    await _database.insert(
+      _TableNames.expenses.tableName,
+      {
+        "conceptId": 0,
+        "amount": -transferSavingsRequestModel.amount,
+        "categoryId": 3,
+        "cicleId": currentCicle.cicleId!,
+        "createdAt": DateTime.now().toString(),
+      },
+    );
+  }
+
+  Future<void> updatePercents(
+      {required Map<CategoryEnum, int> percentsMap}) async {
+    for (CategoryEnum category in percentsMap.keys) {
+      _database.update(
+        _TableNames.categories.tableName,
+        {
+          "percentValue": percentsMap[category],
+        },
+        where: "categoryId = ${category.value}",
+      );
+    }
+  }
 }

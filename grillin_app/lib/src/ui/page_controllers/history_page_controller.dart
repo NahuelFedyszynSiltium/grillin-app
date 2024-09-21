@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
+import '../../../values/k_colors.dart';
 import '../../data_access/data_manager.dart';
 import '../../enums/category_enum.dart';
 import '../../interfaces/i_view_controller.dart';
 import '../../managers/page_manager.dart';
 import '../../models/cicle_model.dart';
 import '../../models/expense_model.dart';
+import '../../utils/functions_utils.dart';
 import '../../utils/page_args.dart';
 
 class HistoryPageController extends ControllerMVC implements IViewController {
@@ -48,16 +50,23 @@ class HistoryPageController extends ControllerMVC implements IViewController {
     PageManager().goHomePage();
   }
 
-  void onCategoryTap(CategoryEnum? category) {
-    setState(() {
-      forceUpdate = true;
-
-      if (category == null) {
-        selectedCateogries.updateAll((key, value) => true);
+  void onCategoryTap(CategoryEnum? category) async {
+    if (category == null) {
+      selectedCateogries.updateAll((key, value) => true);
+    } else {
+      if (selectedCateogries.values.every(
+        (element) => element,
+      )) {
+        selectedCateogries.updateAll(
+          (key, value) => key == category,
+        );
       } else {
         selectedCateogries[category] = !selectedCateogries[category]!;
       }
-    });
+    }
+
+    await getExpenseHistory();
+    setState(() {});
   }
 
   Future<void> getExpenseHistory() async {
@@ -78,10 +87,38 @@ class HistoryPageController extends ControllerMVC implements IViewController {
         expenseList = await DataManager().getExpensesPerCicle(
           categories: aux,
           cicleId: currentCicle!.cicleId!,
+          filterModel: FilterModel(
+            columnName: "createdAt",
+            orderCriteria: OrderCriteria.DESC,
+          ),
         );
       }
     } else {
       expenseList = [];
+    }
+  }
+
+  String getAmountPrefix(ExpenseModel element) {
+    if (element.category == CategoryEnum.saves) {
+      return element.amount < 0 ? "-" : "+";
+    } else {
+      return element.amount > 0 ? "-" : "+";
+    }
+  }
+
+  Color getAmountColor(ExpenseModel element) {
+    if (element.category == CategoryEnum.saves) {
+      return element.amount < 0 ? KColors.white : KColors.greenL1;
+    } else {
+      return element.amount > 0 ? KColors.white : KColors.greenL1;
+    }
+  }
+
+  String getAmountString(ExpenseModel element) {
+    if (element.amount < 0) {
+      return currencyFormat(-element.amount);
+    } else {
+      return currencyFormat(element.amount);
     }
   }
 }

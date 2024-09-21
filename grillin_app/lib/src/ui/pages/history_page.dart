@@ -108,23 +108,13 @@ class HistoryPageState extends StateMVC<HistoryPage> {
                 SizedBox(height: MediaQuery.of(context).size.height * .025),
                 Table(
                   columnWidths: const {
-                    0: FlexColumnWidth(1),
-                    1: FlexColumnWidth(3),
+                    0: FlexColumnWidth(3),
+                    1: FlexColumnWidth(2),
                     2: FlexColumnWidth(2),
-                    3: FlexColumnWidth(2),
                   },
                   children: const [
                     TableRow(
                       children: [
-                        Text(
-                          KStrings.historyTableHeaderCicle,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: KColors.white,
-                            fontSize: KValues.fontSizeMedium,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
                         Text(
                           KStrings.historyTableHeaderConcept,
                           textAlign: TextAlign.center,
@@ -259,10 +249,9 @@ class HistoryPageState extends StateMVC<HistoryPage> {
           child: Table(
             defaultVerticalAlignment: TableCellVerticalAlignment.middle,
             columnWidths: const {
-              0: FlexColumnWidth(1),
-              1: FlexColumnWidth(3),
+              0: FlexColumnWidth(3),
+              1: FlexColumnWidth(2),
               2: FlexColumnWidth(2),
-              3: FlexColumnWidth(2),
             },
             children: _buildTableRows(),
           ),
@@ -278,30 +267,20 @@ class HistoryPageState extends StateMVC<HistoryPage> {
         TableRow(
           children: [
             Text(
-              "${element.cicleId ?? "-"}",
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                color: KColors.white,
-                fontSize: KValues.fontSizeSmallXL,
-              ),
-            ),
-            Text(
-              element.conceptModel.name,
+              element.conceptModel.conceptName,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: element.category.categoryColorBright(),
-                fontSize: KValues.fontSizeSmallXL,
+                fontSize: KValues.fontSizeMedium,
                 fontWeight: FontWeight.w600,
               ),
             ),
             Text(
-              "${element.category != CategoryEnum.saves ? "-" : "+"}\$ ${currencyFormat(element.amount)}",
+              "${_con.getAmountPrefix(element)}\$ ${_con.getAmountString(element)}",
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: element.category != CategoryEnum.saves
-                    ? KColors.white
-                    : KColors.greenL1,
-                fontSize: KValues.fontSizeSmallXL,
+                color: _con.getAmountColor(element),
+                fontSize: KValues.fontSizeMedium,
               ),
             ),
             Text(
@@ -311,7 +290,7 @@ class HistoryPageState extends StateMVC<HistoryPage> {
               textAlign: TextAlign.center,
               style: const TextStyle(
                 color: KColors.white,
-                fontSize: KValues.fontSizeSmallXL,
+                fontSize: KValues.fontSizeMedium,
                 fontStyle: FontStyle.italic,
               ),
             ),
@@ -321,10 +300,6 @@ class HistoryPageState extends StateMVC<HistoryPage> {
       result.add(
         const TableRow(
           children: [
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 2.0),
-              child: Divider(),
-            ),
             Padding(
               padding: EdgeInsets.symmetric(vertical: 2.0),
               child: Divider(),

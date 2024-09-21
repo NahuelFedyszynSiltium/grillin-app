@@ -7,7 +7,7 @@ class KDummyData {
     ExpenseModel(
       conceptModel: ConceptModel(
         category: CategoryEnum.achievements,
-        name: "Un Concepto",
+        conceptName: "Un Concepto",
       ),
       amount: 1000,
       category: CategoryEnum.achievements,
@@ -15,7 +15,7 @@ class KDummyData {
     ExpenseModel(
       conceptModel: ConceptModel(
         category: CategoryEnum.achievements,
-        name: "Un Concepto",
+        conceptName: "Un Concepto",
       ),
       amount: 1000,
       category: CategoryEnum.achievements,
@@ -23,7 +23,7 @@ class KDummyData {
     ExpenseModel(
       conceptModel: ConceptModel(
         category: CategoryEnum.achievements,
-        name: "Un Concepto",
+        conceptName: "Un Concepto",
       ),
       amount: 1000,
       category: CategoryEnum.dailys,
@@ -31,7 +31,7 @@ class KDummyData {
     ExpenseModel(
       conceptModel: ConceptModel(
         category: CategoryEnum.dailys,
-        name: "Un Concepto",
+        conceptName: "Un Concepto",
       ),
       amount: 1000,
       category: CategoryEnum.achievements,
@@ -39,7 +39,7 @@ class KDummyData {
     ExpenseModel(
       conceptModel: ConceptModel(
         category: CategoryEnum.achievements,
-        name: "Un Concepto",
+        conceptName: "Un Concepto",
       ),
       amount: 1000,
       category: CategoryEnum.dailys,
@@ -47,7 +47,7 @@ class KDummyData {
     ExpenseModel(
       conceptModel: ConceptModel(
         category: CategoryEnum.dailys,
-        name: "Un Concepto",
+        conceptName: "Un Concepto",
       ),
       amount: 1000,
       category: CategoryEnum.achievements,
@@ -55,7 +55,7 @@ class KDummyData {
     ExpenseModel(
       conceptModel: ConceptModel(
         category: CategoryEnum.achievements,
-        name: "Un Concepto",
+        conceptName: "Un Concepto",
       ),
       amount: 1000,
       category: CategoryEnum.personals,
@@ -63,7 +63,7 @@ class KDummyData {
     ExpenseModel(
       conceptModel: ConceptModel(
         category: CategoryEnum.personals,
-        name: "Un Concepto",
+        conceptName: "Un Concepto",
       ),
       amount: 1000,
       category: CategoryEnum.achievements,
@@ -71,7 +71,7 @@ class KDummyData {
     ExpenseModel(
       conceptModel: ConceptModel(
         category: CategoryEnum.personals,
-        name: "Un Concepto",
+        conceptName: "Un Concepto",
       ),
       amount: 1000,
       category: CategoryEnum.saves,
@@ -79,7 +79,7 @@ class KDummyData {
     ExpenseModel(
       conceptModel: ConceptModel(
         category: CategoryEnum.saves,
-        name: "Un Concepto",
+        conceptName: "Un Concepto",
       ),
       amount: 1000,
       category: CategoryEnum.saves,
@@ -87,7 +87,7 @@ class KDummyData {
     ExpenseModel(
       conceptModel: ConceptModel(
         category: CategoryEnum.saves,
-        name: "Un Concepto",
+        conceptName: "Un Concepto",
       ),
       amount: 1000,
       category: CategoryEnum.saves,
@@ -95,7 +95,7 @@ class KDummyData {
     ExpenseModel(
       conceptModel: ConceptModel(
         category: CategoryEnum.saves,
-        name: "Un Concepto",
+        conceptName: "Un Concepto",
       ),
       amount: 1000,
       category: CategoryEnum.achievements,
@@ -103,7 +103,7 @@ class KDummyData {
     ExpenseModel(
       conceptModel: ConceptModel(
         category: CategoryEnum.achievements,
-        name: "Un Concepto",
+        conceptName: "Un Concepto",
       ),
       amount: 1000,
       category: CategoryEnum.achievements,
@@ -111,7 +111,7 @@ class KDummyData {
     ExpenseModel(
       conceptModel: ConceptModel(
         category: CategoryEnum.saves,
-        name: "Un Concepto",
+        conceptName: "Un Concepto",
       ),
       amount: 1000,
       category: CategoryEnum.saves,
@@ -119,7 +119,7 @@ class KDummyData {
     ExpenseModel(
       conceptModel: ConceptModel(
         category: CategoryEnum.personals,
-        name: "Un Concepto",
+        conceptName: "Un Concepto",
       ),
       amount: 1000,
       category: CategoryEnum.personals,
@@ -127,7 +127,7 @@ class KDummyData {
     ExpenseModel(
       conceptModel: ConceptModel(
         category: CategoryEnum.personals,
-        name: "Un Concepto",
+        conceptName: "Un Concepto",
       ),
       amount: 1000,
       category: CategoryEnum.personals,
@@ -135,7 +135,7 @@ class KDummyData {
     ExpenseModel(
       conceptModel: ConceptModel(
         category: CategoryEnum.personals,
-        name: "Un Concepto",
+        conceptName: "Un Concepto",
       ),
       amount: 1000,
       category: CategoryEnum.personals,
@@ -143,7 +143,7 @@ class KDummyData {
     ExpenseModel(
       conceptModel: ConceptModel(
         category: CategoryEnum.personals,
-        name: "Un Concepto",
+        conceptName: "Un Concepto",
       ),
       amount: 1000,
       category: CategoryEnum.personals,
@@ -151,7 +151,7 @@ class KDummyData {
     ExpenseModel(
       conceptModel: ConceptModel(
         category: CategoryEnum.achievements,
-        name: "Un Concepto",
+        conceptName: "Un Concepto",
       ),
       amount: 1000,
       category: CategoryEnum.personals,
@@ -159,7 +159,7 @@ class KDummyData {
     ExpenseModel(
       conceptModel: ConceptModel(
         category: CategoryEnum.dailys,
-        name: "Un Concepto",
+        conceptName: "Un Concepto",
       ),
       amount: 1000,
       category: CategoryEnum.dailys,
@@ -167,7 +167,7 @@ class KDummyData {
     ExpenseModel(
       conceptModel: ConceptModel(
         category: CategoryEnum.dailys,
-        name: "Un Concepto",
+        conceptName: "Un Concepto",
       ),
       amount: 1000,
       category: CategoryEnum.dailys,
@@ -175,7 +175,7 @@ class KDummyData {
     ExpenseModel(
       conceptModel: ConceptModel(
         category: CategoryEnum.dailys,
-        name: "Un Concepto",
+        conceptName: "Un Concepto",
       ),
       amount: 1000,
       category: CategoryEnum.dailys,
@@ -183,7 +183,7 @@ class KDummyData {
     ExpenseModel(
       conceptModel: ConceptModel(
         category: CategoryEnum.dailys,
-        name: "Un Concepto",
+        conceptName: "Un Concepto",
       ),
       amount: 1000,
       category: CategoryEnum.dailys,
@@ -191,7 +191,7 @@ class KDummyData {
     ExpenseModel(
       conceptModel: ConceptModel(
         category: CategoryEnum.dailys,
-        name: "Un Concepto",
+        conceptName: "Un Concepto",
       ),
       amount: 1000,
       category: CategoryEnum.dailys,
@@ -199,7 +199,7 @@ class KDummyData {
     ExpenseModel(
       conceptModel: ConceptModel(
         category: CategoryEnum.dailys,
-        name: "Un Concepto",
+        conceptName: "Un Concepto",
       ),
       amount: 1000,
       category: CategoryEnum.dailys,
@@ -207,7 +207,7 @@ class KDummyData {
     ExpenseModel(
       conceptModel: ConceptModel(
         category: CategoryEnum.dailys,
-        name: "Un Concepto",
+        conceptName: "Un Concepto",
       ),
       amount: 1000,
       category: CategoryEnum.dailys,
@@ -215,7 +215,7 @@ class KDummyData {
     ExpenseModel(
       conceptModel: ConceptModel(
         category: CategoryEnum.dailys,
-        name: "Un Concepto",
+        conceptName: "Un Concepto",
       ),
       amount: 1000,
       category: CategoryEnum.dailys,
@@ -223,7 +223,7 @@ class KDummyData {
     ExpenseModel(
       conceptModel: ConceptModel(
         category: CategoryEnum.dailys,
-        name: "Un Concepto",
+        conceptName: "Un Concepto",
       ),
       amount: 1000,
       category: CategoryEnum.dailys,
@@ -231,7 +231,7 @@ class KDummyData {
     ExpenseModel(
       conceptModel: ConceptModel(
         category: CategoryEnum.saves,
-        name: "Un Concepto",
+        conceptName: "Un Concepto",
       ),
       amount: 1000,
       category: CategoryEnum.saves,
@@ -239,7 +239,7 @@ class KDummyData {
     ExpenseModel(
       conceptModel: ConceptModel(
         category: CategoryEnum.saves,
-        name: "Un Concepto",
+        conceptName: "Un Concepto",
       ),
       amount: 1000,
       category: CategoryEnum.saves,
@@ -247,7 +247,7 @@ class KDummyData {
     ExpenseModel(
       conceptModel: ConceptModel(
         category: CategoryEnum.saves,
-        name: "Un Concepto",
+        conceptName: "Un Concepto",
       ),
       amount: 1000,
       category: CategoryEnum.saves,
@@ -255,7 +255,7 @@ class KDummyData {
     ExpenseModel(
       conceptModel: ConceptModel(
         category: CategoryEnum.saves,
-        name: "Un Concepto",
+        conceptName: "Un Concepto",
       ),
       amount: 1000,
       category: CategoryEnum.saves,
@@ -263,7 +263,7 @@ class KDummyData {
     ExpenseModel(
       conceptModel: ConceptModel(
         category: CategoryEnum.saves,
-        name: "Un Concepto",
+        conceptName: "Un Concepto",
       ),
       amount: 1000,
       category: CategoryEnum.saves,
@@ -271,7 +271,7 @@ class KDummyData {
     ExpenseModel(
       conceptModel: ConceptModel(
         category: CategoryEnum.saves,
-        name: "Un Concepto",
+        conceptName: "Un Concepto",
       ),
       amount: 1000,
       category: CategoryEnum.saves,
@@ -279,7 +279,7 @@ class KDummyData {
     ExpenseModel(
       conceptModel: ConceptModel(
         category: CategoryEnum.saves,
-        name: "Un Concepto",
+        conceptName: "Un Concepto",
       ),
       amount: 1000,
       category: CategoryEnum.saves,

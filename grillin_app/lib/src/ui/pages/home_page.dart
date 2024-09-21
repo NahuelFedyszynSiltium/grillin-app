@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'dart:developer';
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
@@ -216,7 +215,10 @@ class HomePagePageState extends StateMVC<HomePage> {
                               alignment: Alignment.centerLeft,
                               child: Text(
                                 "\$ ${amount != null ? currencyFormat(amount) : "- "}",
-                                style: KStyles.homeCardBodyTextStyle,
+                                style: (amount ?? 0) >= 0
+                                    ? KStyles.homeCardBodyTextStyle
+                                    : KStyles
+                                        .homeCardBodyNegativeValueTextStyle,
                               ),
                             ),
                     ),

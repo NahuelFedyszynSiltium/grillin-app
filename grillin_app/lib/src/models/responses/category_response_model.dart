@@ -1,16 +1,14 @@
-import 'dart:developer';
-
 import '../../enums/category_enum.dart';
 
 class CategoryResponseModel {
   late int categoryId;
   late int percentValue;
-  late String? categoryName;
+  late String categoryName;
   late num addFromSavings;
 
   CategoryResponseModel.fromJson(Map<String, dynamic> json) {
     categoryId = json["categoryId"];
-    percentValue = json["percentsValue"] ?? 0;
+    percentValue = json["percentValue"] ?? 0;
     categoryName = json["categoryName"];
     addFromSavings = json["addFromSavings"] ?? 0;
   }

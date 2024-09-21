@@ -60,10 +60,10 @@ class SimpleComponents {
                           .05),
               _drawerItem(
                 icon: Icons.dashboard,
-                label: KStrings.board,
+                label: KStrings.drawerBoard,
                 onTap: () {
                   try {
-                    Scaffold.of(context).openDrawer();
+                    Scaffold.of(context).closeDrawer();
                   } catch (err) {
                     log(err.toString());
                   }
@@ -71,11 +71,35 @@ class SimpleComponents {
                 },
               ),
               _drawerItem(
-                icon: Icons.savings,
-                label: KStrings.transferSavings,
+                icon: Icons.monetization_on,
+                label: KStrings.drawerStartEndCicle,
                 onTap: () {
                   try {
-                    Scaffold.of(context).openDrawer();
+                    Scaffold.of(context).closeDrawer();
+                  } catch (err) {
+                    log(err.toString());
+                  }
+                  PageManager().goSetIncomePage();
+                },
+              ),
+              _drawerItem(
+                icon: Icons.history,
+                label: KStrings.drawerHistory,
+                onTap: () {
+                  try {
+                    Scaffold.of(context).closeDrawer();
+                  } catch (err) {
+                    log(err.toString());
+                  }
+                  PageManager().goHistoryPage();
+                },
+              ),
+              _drawerItem(
+                icon: Icons.savings,
+                label: KStrings.drawerSaves,
+                onTap: () {
+                  try {
+                    Scaffold.of(context).closeDrawer();
                   } catch (err) {
                     log(err.toString());
                   }
@@ -84,10 +108,10 @@ class SimpleComponents {
               ),
               _drawerItem(
                 icon: Icons.percent,
-                label: KStrings.changePercents,
+                label: KStrings.drawerPercents,
                 onTap: () {
                   try {
-                    Scaffold.of(context).openDrawer();
+                    Scaffold.of(context).closeDrawer();
                   } catch (err) {
                     log(err.toString());
                   }
@@ -95,23 +119,11 @@ class SimpleComponents {
                 },
               ),
               _drawerItem(
-                icon: Icons.edit_note,
-                label: KStrings.setFixedIncomes,
-                onTap: () {
-                  try {
-                    Scaffold.of(context).openDrawer();
-                  } catch (err) {
-                    log(err.toString());
-                  }
-                  PageManager().goSetIncomePage();
-                },
-              ),
-              _drawerItem(
                 icon: Icons.bar_chart,
-                label: KStrings.graphs,
+                label: KStrings.drawerGraphs,
                 onTap: () {
                   try {
-                    Scaffold.of(context).openDrawer();
+                    Scaffold.of(context).closeDrawer();
                   } catch (err) {
                     log(err.toString());
                   }
@@ -119,15 +131,14 @@ class SimpleComponents {
                 },
               ),
               _drawerItem(
-                icon: Icons.history,
-                label: KStrings.history,
+                icon: Icons.list,
+                label: KStrings.drawerConcepts,
                 onTap: () {
                   try {
-                    Scaffold.of(context).openDrawer();
+                    Scaffold.of(context).closeDrawer();
                   } catch (err) {
                     log(err.toString());
                   }
-                  PageManager().goHistoryPage();
                 },
               ),
             ],
@@ -135,10 +146,11 @@ class SimpleComponents {
         }),
       );
 
-  Widget _drawerItem(
-      {required String label,
-      required IconData icon,
-      required Function() onTap}) {
+  Widget _drawerItem({
+    required String label,
+    required IconData icon,
+    required Function() onTap,
+  }) {
     return GestureDetector(
       onTap: onTap,
       child: Container(

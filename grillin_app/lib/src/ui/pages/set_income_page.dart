@@ -6,6 +6,7 @@ import '../../../values/k_icons.dart';
 import '../../../values/k_strings.dart';
 import '../../../values/k_styles.dart';
 import '../../../values/k_values.dart';
+import '../../providers/app_provider.dart';
 import '../../utils/page_args.dart';
 import '../components/button_component.dart';
 import '../components/simple_components.dart';
@@ -87,6 +88,24 @@ class SetIncomePageState extends StateMVC<SetIncomePage> {
                               style: TextStyle(
                                 color: KColors.white,
                                 fontSize: KValues.fontSizeMedium,
+                              ),
+                            ),
+                            Visibility(
+                              visible: AppProvider().boardDataModel != null,
+                              child: SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * .025,
+                              ),
+                            ),
+                            Visibility(
+                              visible: AppProvider().boardDataModel != null,
+                              child: const Text(
+                                KStrings.setFixedIncomePageCloseCicleHint,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: KColors.white,
+                                  fontSize: KValues.fontSizeMedium,
+                                ),
                               ),
                             ),
                             SizedBox(
